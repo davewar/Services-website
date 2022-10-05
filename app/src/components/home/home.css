@@ -1,0 +1,61 @@
+.home-title {
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+}
+
+.secondary-title {
+	width: 70%;
+	margin-right: auto;
+}
+img {
+	width: 100%;
+	height: auto;
+	border: transparent;
+}
+
+.specials {
+	width: 90%;
+	margin: 2% 5%;
+	text-align: center;
+}
+
+/* ipad mini */
+@media (min-width: 481px) and (max-width: 768px) {
+	.home-title {
+		padding-top: 0.5em;
+		padding-bottom: 0.5em;
+		text-align: center;
+	}
+
+	.secondary-title {
+		width: 90%;
+		margin-right: auto;
+	}
+}
+
+/* surface pro 7 */
+@media (min-width: 769px) and (max-width: 1024px) {
+	.home-title {
+		padding-top: 1em;
+		padding-bottom: 1em;
+	}
+
+	.secondary-title {
+		padding-top: 0.75em;
+	}
+}
+
+/* large */
+@media screen and (min-width: 1025px) {
+	/* pc pic */
+	.image-container > img {
+		max-width: 900px;
+	}
+}
+
+@media screen and (min-width: 1200px) {
+	/* pc pic */
+	.image-container > img {
+		max-width: 900px;
+	}
+}

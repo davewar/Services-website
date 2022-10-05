@@ -1,0 +1,44 @@
+.free-quote {
+	text-align: center;
+	font-weight: bold;
+}
+
+.box-container {
+	display: flex;
+	flex-direction: column;
+	margin: 5% auto;
+	gap: 1rem;
+	/* background-color: antiquewhite; */
+}
+
+.box {
+	background-color: var(--box-color);
+	border: solid 1px black;
+	/* width */
+	flex-basis: 100%;
+	/* 16px */
+	padding: 1em;
+}
+
+.box-image {
+	display: block;
+	width: 20%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.box > h5,
+.box > h4,
+.box > p {
+	text-align: center;
+}
+
+@media screen and (min-width: 576px) {
+	.box-container {
+		flex-direction: row;
+	}
+	.box-image {
+		width: 30%;
+		margin: 1em auto;
+	}
+}

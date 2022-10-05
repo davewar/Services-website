@@ -1,0 +1,16 @@
+.footer {
+	background-color: var(--footer-color);
+	background-color: #cdfcf0;
+	margin-top: 5%;
+}
+
+.footer-box {
+	width: 100%;
+	margin: 0% auto;
+	text-align: center;
+	padding: 2rem;
+	/* background-color: red; */
+}
+.footer-box > button {
+	margin-top: 0;
+}

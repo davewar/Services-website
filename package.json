@@ -1,0 +1,13 @@
+{
+	"scripts": {
+		"begin": "nodemon server.js"
+	},
+	"dependencies": {
+		"better-react-spinkit": "^2.0.4",
+		"cors": "^2.8.5",
+		"dotenv": "^16.0.3",
+		"express": "^4.18.1",
+		"mongoose": "^6.6.4",
+		"nodemailer": "^6.8.0"
+	}
+}
