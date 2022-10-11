@@ -1,5 +1,6 @@
 import React from 'react';
 import './services.css';
+import Box from '../Box';
 
 const Services = () => {
 	return (
@@ -103,6 +104,7 @@ const Services = () => {
 					</article>
 				</section>
 			</main>
+			<Box />
 		</>
 	);
 };

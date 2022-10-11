@@ -54,6 +54,11 @@ button {
 	cursor: pointer;
 }
 
+.btn-blue {
+	background-color: #007bff;
+	border: none;
+}
+
 .contactbtn {
 	margin-left: 0;
 	margin-top: 5%;

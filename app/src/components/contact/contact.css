@@ -5,7 +5,7 @@
 .contact-container {
 	padding: 1em;
 	border-radius: 0.5em;
-	outline: 2px dashed blue;
+	outline: 2px dashed #007bff;
 	margin-bottom: 1em;
 }
 
@@ -16,7 +16,7 @@
 	margin: 0 auto;
 }
 .contact-title > h4 {
-	color: #f64f4f;
+	color: var(--blue-color);
 }
 
 .form-group {
@@ -55,13 +55,13 @@ input::placeholder {
 
 .form-group:active label,
 .form-group:hover label {
-	color: blue;
+	color: #007bff;
 }
 .form-group:active input,
 .form-group:hover input,
 .form-group:hover textarea,
 .form-group:hover textarea {
-	border: 2px blue solid;
+	border: 2px #007bff solid;
 }
 
 .form-group > textarea {
@@ -90,9 +90,10 @@ input::placeholder {
 	align-items: center;
 	gap: 3em;
 	margin-bottom: 1em;
+	/* border: 2px red solid; */
 }
 .rightside-div > h4 {
-	color: #f64f4f;
+	color: var(--blue-color);
 }
 
 .leftside-div {

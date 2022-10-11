@@ -24,37 +24,45 @@ const Navbar = () => {
 				<div className='header-title main-container'>
 					<h2 className='title'>DW Servicing</h2>
 				</div>
-			</header>
-			<nav className='navbar main-container '>
-				<div className='nav-container'>
-					<div className='left'></div>
-					<div className='right'>
-						<div className='flex-item'>
-							{location.pathname !== Paths.HOMEPATH ? (
-								<Link className='link-item' to={Paths.HOMEPATH}>
-									Home
-								</Link>
-							) : null}
-						</div>
-						<div className='flex-item'>
-							{location.pathname !== Paths.SERVICESPATH ? (
-								<Link className='link-item' to={Paths.SERVICESPATH}>
-									Services
-								</Link>
-							) : null}
-						</div>
-						<div className='flex-item'>
-							{location.pathname !== Paths.CONTACTPATH ? (
-								<button className='contactbtn'>
-									<Link className='link btn' to={Paths.CONTACTPATH}>
-										Contact Us
+
+				<nav className='navbar main-container '>
+					<div className='nav-container'>
+						<div className='left'></div>
+						<div className='right'>
+							<div className='flex-item'>
+								{location.pathname !== Paths.HOMEPATH ? (
+									<Link className='link-item' to={Paths.HOMEPATH}>
+										Home
 									</Link>
-								</button>
-							) : null}
+								) : null}
+							</div>
+							<div className='flex-item'>
+								{location.pathname !== Paths.SERVICESPATH ? (
+									<Link className='link-item' to={Paths.SERVICESPATH}>
+										Services
+									</Link>
+								) : null}
+							</div>
+							<div className='flex-item'>
+								{location.pathname !== Paths.CONTACTPATH ? (
+									<button className='contactbtn'>
+										<Link className='link btn' to={Paths.CONTACTPATH}>
+											Contact Us
+										</Link>
+									</button>
+								) : null}
+							</div>
+							<div className='flex-item'>
+								{location.pathname !== Paths.LOGINPATH ? (
+									<Link className='link-item' to={Paths.LOGINPATH}>
+										Log In
+									</Link>
+								) : null}
+							</div>
 						</div>
 					</div>
-				</div>
-			</nav>
+				</nav>
+			</header>
 		</>
 	);
 };

@@ -9,6 +9,8 @@
 	--radius: 0.25rem;
 	--max-width: 1170px;
 	--fixed-width: 620px;
+
+	--blue-color: #007bff;
 }
 /* .
 https://www.figma.com/file/ZEzekTBzzBdTPx0AP9US41/dw-servicing=1%3A2?node-id
@@ -99,14 +101,46 @@ p {
 	/* background-color: red; */
 	min-height: 100vh;
 	width: 100%;
-	align-items: center;
-	justify-content: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
 .main-container {
 	width: 90%;
 	margin: 0 auto;
 	/* background-color: red; */
+}
+.text-center {
+	text-align: center;
+}
+
+/* forms */
+.alert {
+	padding: 5px;
+	margin: 5px;
+}
+.alert-danger {
+	color: red;
+	background-color: rgb(246, 196, 196);
+	font-weight: bold;
+}
+
+.text-danger {
+	color: red;
+	margin-top: 10px;
+	font-weight: bold;
+}
+.text-success {
+	color: green;
+}
+
+.alert-success {
+	color: green;
+	background-color: rgb(169, 226, 169);
+}
+.text-capitalize {
+	text-transform: capitalize;
 }
 
 /* large /desktops*/

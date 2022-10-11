@@ -108,7 +108,7 @@ const Contact = () => {
 								)}
 							</div>
 
-							<button type='submit' className='btn' id='btn-save'>
+							<button type='submit' className='btn btn-blue' id='btn-save'>
 								Submit
 							</button>
 						</form>
@@ -118,7 +118,7 @@ const Contact = () => {
 				<div className='address'>
 					<div className='address-box'>
 						<div className='leftside-div'>
-							<img src='images/location.png' alt='location' />
+							<img class='img-bg' src='images/location.png' alt='location' />
 						</div>
 						<div className='rightside-div'>
 							<h4>Contact Us</h4>

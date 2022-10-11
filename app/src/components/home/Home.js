@@ -1,4 +1,5 @@
 import React from 'react';
+import Box from '../Box';
 import './home.css';
 
 const Home = () => {
@@ -46,6 +47,7 @@ const Home = () => {
 					</div>
 				</section>
 			</main>
+			<Box />
 		</>
 	);
 };

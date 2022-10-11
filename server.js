@@ -8,7 +8,7 @@ require('dotenv').config();
 const app = express();
 app.use(express.json());
 
-app.use(cors({ origin: 'http://localhost:5000', credentials: true }));
+app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 
 const connectDb = async () => {
 	try {
@@ -33,6 +33,10 @@ app.use('/test', (req, res) => {
 
 const emailRouter = require('./routes/email');
 app.use('/api/email', emailRouter);
+
+// login/pw-reset- user
+const userRouter = require('./routes/users');
+app.use('/api/user', userRouter);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

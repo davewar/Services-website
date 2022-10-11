@@ -18,7 +18,7 @@ const Footer = () => {
 							</Link>
 						</button>
 
-						<h5>Built in React by DW Servicing</h5>
+						<h5>DW Servicing</h5>
 					</div>
 				</div>
 			</footer>

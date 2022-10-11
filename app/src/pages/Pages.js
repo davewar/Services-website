@@ -10,6 +10,8 @@ import Home from '../components/home/Home';
 import Box from '../components/Box';
 import Footer from '../components/Footer';
 
+import Login from '../components/accounts/Login';
+
 const Pages = () => {
 	return (
 		<>
@@ -19,9 +21,13 @@ const Pages = () => {
 					<Route path={Paths.HOMEPATH} element={<Home />} />
 					<Route path={Paths.SERVICESPATH} element={<Services />}></Route>
 					<Route path={Paths.CONTACTPATH} element={<Contact />}></Route>
+
+					{/* admin */}
+					<Route path={Paths.LOGINPATH} element={<Login />}></Route>
+
 					<Route path='*' element={<Home />} />
 				</Routes>
-				<Box />
+
 				<Footer />
 			</BrowserRouter>
 		</>
