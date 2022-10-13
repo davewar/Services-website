@@ -28,7 +28,7 @@ const isEmail = (email) => {
 };
 
 module.exports.login_post = async (req, res) => {
-	console.log('hello1 you');
+	console.log('hello1');
 	try {
 		const { email, password } = req.body;
 
@@ -172,5 +172,60 @@ module.exports.signup_post = async (req, res) => {
 		});
 	} catch (err) {
 		res.status(400).json({ errors: err.message });
+	}
+};
+
+// res.clearCookie('refreshtoken', { path: '/api/user/refresh_token' });
+module.exports.logout_get = async (req, res) => {
+	try {
+		res.clearCookie('refreshtoken', { path: '/user/refresh_token' });
+		return res.json({ msg: 'logged our' });
+	} catch (err) {
+		res.status(400).json({ msg: err.message });
+	}
+};
+
+module.exports.deleteUser_delete = async (req, res) => {
+	try {
+		await User.findByIdAndDelete(req.params.id);
+		res.status(200).json('user deleted');
+	} catch (err) {
+		res.json({ msg: err.message });
+	}
+};
+
+// does user have a cookie, if yes give them a new access token
+module.exports.refreshToken_get = async (req, res) => {
+	try {
+		const refresh_token = req.cookies.refreshtoken;
+		// console.log("refreshToken_get - RT sent",refresh_token)
+		if (!refresh_token)
+			return res.status(400).json({ msg: 'Please Login or Register -a' });
+
+		jwt.verify(refresh_token, process.env.REFESH_SECRET_KEY, (err, decoded) => {
+			// console.log(" refreshToken_get Cookie Valid - E",err)
+			// console.log(" refreshToken_get Cookie Valid - DECODED",decoded)
+			if (err)
+				return res.status(400).json({ msg: 'Please Login or Register -b' });
+
+			const accesstoken = createToken(decoded.id);
+			// console.log("refreshToken_get NEW AT", accesstoken)
+			res.status(200).json({ accesstoken });
+		});
+	} catch (err) {
+		res.status(400).json({ dwmsg: err.message });
+	}
+};
+
+module.exports.getUser_get = async (req, res) => {
+	try {
+		// console.log('getUser_get a', req.user.id);
+		const user = await User.findById(req.user.id).select('-password');
+		// console.log("getUser_get", user);
+		if (!user) return res.status(400).json({ msg: 'User does not exist.' });
+
+		res.json(user);
+	} catch (err) {
+		res.status(400).json({ msg: err.message });
 	}
 };

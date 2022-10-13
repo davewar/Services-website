@@ -1,11 +1,38 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import * as Paths from '../constants/routes';
 import './navbar.css';
+import { UserContext } from '../contexts/user';
 
 import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
 	const location = useLocation(null);
+
+	const {
+		isLogged,
+		isAdmin,
+		setIsLogged,
+		setIsAdmin,
+		setAccessToken,
+		setUser,
+		user,
+	} = useContext(UserContext);
+
+	const logUserOut = async () => {
+		try {
+			//remove cookie
+			await fetch('user/logout');
+			//remove ls
+			localStorage.removeItem('firstlogin');
+
+			setIsLogged(false);
+			setIsAdmin(false);
+			setAccessToken('');
+			setUser('');
+		} catch (err) {
+			console.log(err);
+		}
+	};
 
 	return (
 		<>
@@ -53,9 +80,20 @@ const Navbar = () => {
 								) : null}
 							</div>
 							<div className='flex-item'>
-								{location.pathname !== Paths.LOGINPATH ? (
+								{!isLogged ? (
 									<Link className='link-item' to={Paths.LOGINPATH}>
 										Log In
+									</Link>
+								) : null}
+							</div>
+							<div className='flex-item'>
+								{isLogged ? (
+									<Link
+										className='link-item'
+										onClick={logUserOut}
+										to={Paths.HOMEPATH}
+									>
+										Log Out
 									</Link>
 								) : null}
 							</div>

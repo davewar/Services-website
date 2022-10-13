@@ -13,6 +13,7 @@ const Contact = () => {
 	// email success
 
 	const handleChange = (e, item) => {
+		/* eslint-disable */
 		const emailRegEx = RegExp(
 			/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 		);
@@ -118,7 +119,11 @@ const Contact = () => {
 				<div className='address'>
 					<div className='address-box'>
 						<div className='leftside-div'>
-							<img class='img-bg' src='images/location.png' alt='location' />
+							<img
+								className='img-bg'
+								src='images/location.png'
+								alt='location'
+							/>
 						</div>
 						<div className='rightside-div'>
 							<h4>Contact Us</h4>

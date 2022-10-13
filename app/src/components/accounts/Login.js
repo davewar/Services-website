@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './login.css';
+import { UserContext } from '../../contexts/user';
 
 const Login = () => {
-	const [email, setEmail] = useState('');
+	const { setAccessToken } = useContext(UserContext); //global user
+
+	const [email, setEmail] = useState('test@gmail.com');
 	const [emailErr, setEmailErr] = useState('');
-	const [password, setPassword] = useState('');
+	const [password, setPassword] = useState('1111111');
 	const [passwordErr, setPasswordErr] = useState('');
-	const [accessToken, setAccessToken] = useState('');
+	/* eslint-disable */
+	// const [accessToken, setAccessToken] = useState('');
 	const [signInErr, setSignInErr] = useState('');
 
 	const navigate = useNavigate();
@@ -15,6 +19,8 @@ const Login = () => {
 	const handleChange = (e, item) => {
 		//clear
 		setSignInErr('');
+
+		/* eslint-disable */
 		const emailRegEx = RegExp(
 			/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 		);
@@ -33,14 +39,12 @@ const Login = () => {
 
 	const handleSignin = async (e) => {
 		e.preventDefault();
-		console.log('fgfgf');
 
 		if (email && password && !emailErr && !passwordErr) {
 			setSignInErr('');
-			setAccessToken('');
 
 			try {
-				const res = await fetch('/api/user/login', {
+				const res = await fetch('/user/login', {
 					method: 'POST',
 					body: JSON.stringify({ email, password }),
 					headers: {
@@ -50,17 +54,16 @@ const Login = () => {
 				});
 
 				const data = await res.json();
-				console.log(data);
+				// console.log(data);
 
 				if (data.errors) {
 					setSignInErr(data.errors);
 				} else {
 					if (data.user) {
-						console.log('1!gfgf');
 						localStorage.setItem('firstlogin', true);
 						setAccessToken(data.accesstoken);
 
-						// navigate('./home');
+						navigate('../dashboard');
 					}
 				}
 			} catch (err) {
@@ -115,7 +118,7 @@ const Login = () => {
 						</button>
 					</form>
 
-					<Link className='forgot-pw' to='#'>
+					<Link className='forgot-pw' to='../resetpassword'>
 						Forgot Password
 					</Link>
 				</div>

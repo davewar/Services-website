@@ -2,11 +2,13 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const path = require('path');
+const cookieParser = require('cookie-parser');
 
 require('dotenv').config();
 
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
 
 app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 
@@ -36,7 +38,7 @@ app.use('/api/email', emailRouter);
 
 // login/pw-reset- user
 const userRouter = require('./routes/users');
-app.use('/api/user', userRouter);
+app.use('/user', userRouter);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
