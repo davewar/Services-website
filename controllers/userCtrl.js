@@ -28,7 +28,6 @@ const isEmail = (email) => {
 };
 
 module.exports.login_post = async (req, res) => {
-	console.log('hello1');
 	try {
 		const { email, password } = req.body;
 
@@ -161,11 +160,11 @@ module.exports.signup_post = async (req, res) => {
 
 		const url = `${process.env.CLIENT_URL}/user/activate/${accesstoken}`;
 		//send email
-		// main(
-		// 	email,
-		// 	url,
-		// 	'DWSHOP. Please activate your account - link valid for 10 minutes'
-		// );
+		main(
+			email,
+			url,
+			'DWSHOP. Please activate your account - link valid for 10 minutes'
+		);
 
 		res.status(200).send({
 			msg: 'Please check your email and activate your account using the link',
@@ -227,5 +226,150 @@ module.exports.getUser_get = async (req, res) => {
 		res.json(user);
 	} catch (err) {
 		res.status(400).json({ msg: err.message });
+	}
+};
+
+module.exports.forgot_post = async (req, res) => {
+	try {
+		const { email } = req.body;
+
+		if (!email)
+			return res
+				.status(400)
+				.json({ errors: 'Incorrect login. Please try again' });
+
+		if (!isEmail(email))
+			return res.status(400).json({
+				errors: 'Email is not valid. Please re-enter your email address',
+			});
+
+		const user = await User.findOne({ email });
+
+		if (!user)
+			return res.status(400).json({ errors: 'Account does not exists' });
+
+		//create tokens
+		const accesstoken = createToken(user._id);
+		const url = `${process.env.CLIENT_URL}/reset_password/${accesstoken}`;
+		main(
+			email,
+			url,
+			'DWSHOP. Please reset your password - link valid for 10 minutes'
+		);
+
+		//all gd
+
+		res.status(200).send({
+			msg: 'Please check your email and reset your password using the link',
+		});
+	} catch (err) {}
+};
+
+module.exports.activate_post = async (req, res) => {
+	try {
+		const { accesstoken } = req.body;
+		// console.log(accesstoken);
+		if (!accesstoken)
+			return res.status(400).json({
+				errors:
+					'Invalid Authentication. Please request a new link via the SignIn button',
+			});
+
+		jwt.verify(accesstoken, process.env.SECRET_KEY, (err, decoded) => {
+			// console.log("D",decoded);
+			if (err) {
+				return res.status(400).json({
+					errors:
+						'Invalid Authentication. Please request a new link via the SignIn button',
+				});
+			}
+
+			req.user = decoded.id;
+		});
+
+		const user = await User.findById(req.user);
+
+		if (!user)
+			return res
+				.status(400)
+				.json({ errors: 'No Account exists. Please register' });
+
+		await User.findOneAndUpdate(
+			{ _id: req.user },
+			{
+				validated: true,
+			}
+		);
+
+		return res.json({ msg: 'Account activated. Please log in.' });
+	} catch (err) {
+		console.log('Activate DW', err.message);
+		res.status(500).json({ errors: err.message });
+	}
+};
+
+module.exports.reset_post = async (req, res) => {
+	try {
+		const { password, email, accesstoken } = req.body;
+
+		//form validations
+
+		if (!accesstoken || !email || !password)
+			return res
+				.status(400)
+				.json({ errors: 'Incorrect login. Please try again' });
+		if (password.length < 6)
+			return res
+				.status(400)
+				.json({ errors: 'Password is at least 6 characters long.' });
+		if (!isEmail(email))
+			return res.status(400).json({
+				errors: 'Email is not valid. Please re-enter your email address',
+			});
+
+		//check the email address entered correectly
+		const account = await User.findOne({ email });
+		if (!account)
+			return res.status(400).json({
+				errors:
+					'Invalid Authentication. Please check you entered your email address correctly and try again',
+			});
+
+		jwt.verify(accesstoken, process.env.SECRET_KEY, (err, decoded) => {
+			// console.log("D",decoded);
+			if (err) {
+				return res.status(400).json({
+					errors:
+						'Invalid Authentication. Please request a new link via the SignIn button',
+				});
+			}
+
+			req.user = decoded.id;
+		});
+
+		const user = await User.findById(req.user);
+
+		if (!user)
+			return res.status(400).json({
+				errors:
+					'Invalid Authentication. Please request a new link via the SignIn button',
+			});
+
+		const hashpassword = await bcrypt.hash(password, 10);
+
+		await User.findOneAndUpdate(
+			{ _id: req.user },
+			{
+				password: hashpassword,
+				IncorrectPW: 0,
+				validated: true,
+			}
+		);
+
+		res.json({
+			msg: 'Password successfully changed! Please signin to use your account',
+		});
+	} catch (err) {
+		res.status(400).json({ errors: err.message });
 	}
 };

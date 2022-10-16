@@ -10,12 +10,10 @@ const Navbar = () => {
 
 	const {
 		isLogged,
-		isAdmin,
 		setIsLogged,
 		setIsAdmin,
 		setAccessToken,
 		setUser,
-		user,
 	} = useContext(UserContext);
 
 	const logUserOut = async () => {

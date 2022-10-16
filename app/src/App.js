@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import Pages from './pages/Pages';
 import Loading from './components/Loading';
 import { UserContext } from './contexts/user';
-import { BrowserRouter as Router } from 'react-router-dom';
 
 function App() {
 	const [isLoading, setLoading] = useState(true);
@@ -33,13 +32,7 @@ function App() {
 		}
 	}, []);
 
-	return (
-		<div className='App'>
-			{/* {isLoading ? <Loading /> : null} */}
-
-			<Pages />
-		</div>
-	);
+	return <div className='App'>{isLoading ? <Loading /> : <Pages />}</div>;
 }
 
 export default App;

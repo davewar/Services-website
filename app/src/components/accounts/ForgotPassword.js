@@ -1,18 +1,15 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './login.css';
-import { UserContext } from '../../contexts/user';
 
-const Login = () => {
-	const { setAccessToken } = useContext(UserContext); //global user
-
-	const [email, setEmail] = useState('test@gmail.com');
+const ForgotPassword = () => {
+	const [email, setEmail] = useState('');
 	const [emailErr, setEmailErr] = useState('');
-	const [password, setPassword] = useState('1111111');
-	const [passwordErr, setPasswordErr] = useState('');
+
 	/* eslint-disable */
-	// const [accessToken, setAccessToken] = useState('');
+
 	const [signInErr, setSignInErr] = useState('');
+	const [success, setSuccess] = useState('');
 
 	const navigate = useNavigate();
 
@@ -29,24 +26,19 @@ const Login = () => {
 			setEmail(e.target.value);
 			!emailRegEx.test(email) ? setEmailErr('Invalid Email!') : setEmailErr('');
 		}
-		if (item === 'password') {
-			setPassword(e.target.value);
-			e.target.value.length < 3
-				? setPasswordErr('Password must be at least 3 characters!')
-				: setPasswordErr('');
-		}
 	};
 
 	const handleSignin = async (e) => {
 		e.preventDefault();
 
-		if (email && password && !emailErr && !passwordErr) {
+		if (email && !emailErr) {
 			setSignInErr('');
+			setSuccess('');
 
 			try {
-				const res = await fetch('/user/login', {
+				const res = await fetch('/user/forgot', {
 					method: 'POST',
-					body: JSON.stringify({ email, password }),
+					body: JSON.stringify({ email }),
 					headers: {
 						'Content-Type': 'application/json',
 						credentials: 'include',
@@ -59,12 +51,7 @@ const Login = () => {
 				if (data.errors) {
 					setSignInErr(data.errors);
 				} else {
-					if (data.user) {
-						localStorage.setItem('firstlogin', true);
-						setAccessToken(data.accesstoken);
-
-						navigate('../dashboard');
-					}
+					setSuccess(data.msg);
 				}
 			} catch (err) {
 				console.log('dw', err.message);
@@ -76,11 +63,17 @@ const Login = () => {
 		<>
 			<div className='main-container'>
 				<div className='sign-in'>
-					<h4 className='text-center'>Sign in</h4>
+					<h4 className='text-center'>Reset Password</h4>
 
 					{signInErr && (
 						<div className='alert alert-danger text-center'>
 							<span className='text-danger text-capitalize'>{signInErr}</span>
+						</div>
+					)}
+
+					{success && (
+						<div className='alert alert-success text-center'>
+							<span className='text-success text-capitalize'>{success}</span>
 						</div>
 					)}
 					<form onSubmit={handleSignin}>
@@ -98,28 +91,14 @@ const Login = () => {
 							/>
 							<small className='text-danger'>{emailErr}</small>
 						</div>
-						<div className='form-group'>
-							<label htmlFor='password'>Password</label>
-							<input
-								type='password'
-								required
-								autoComplete='off'
-								name='password'
-								id='passwordl'
-								placeholder='Enter password'
-								value={password}
-								onChange={(e) => handleChange(e, 'password')}
-							/>
-							<small className='text-danger'>{passwordErr}</small>
-						</div>
 
 						<button type='submit' className='btn btn-blue' id='btn-save'>
-							Sign In
+							Forgot Password
 						</button>
 					</form>
 
-					<Link className='forgot-pw' to='../resetaccount'>
-						Forgot Password
+					<Link className='forgot-pw' to='../login'>
+						Log In
 					</Link>
 				</div>
 			</div>
@@ -127,4 +106,4 @@ const Login = () => {
 	);
 };
 
-export default Login;
+export default ForgotPassword;
