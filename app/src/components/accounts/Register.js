@@ -1,11 +1,11 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './login.css';
-import { UserContext } from '../../contexts/user';
+
+import { AiOutlineEye } from 'react-icons/ai';
+import { AiOutlineEyeInvisible } from 'react-icons/ai';
 
 const Register = () => {
-	const { setAccessToken } = useContext(UserContext); //global user
-
 	const [name, setName] = useState('');
 	const [nameErr, setNameErr] = useState('');
 
@@ -17,9 +17,12 @@ const Register = () => {
 	const [password2, setPassword2] = useState('');
 	const [passwordErr2, setPasswordErr2] = useState('');
 	/* eslint-disable */
-	// const [accessToken, setAccessToken] = useState('');
+
 	const [signInErr, setSignInErr] = useState('');
 	const [success, setSuccess] = useState('');
+	//password visable
+	const [visable, setVisable] = useState('false');
+	const [visable2, setVisable2] = useState('false');
 
 	const navigate = useNavigate();
 
@@ -98,6 +101,15 @@ const Register = () => {
 			}
 		}
 	};
+	//toggle password
+	const toggleType = (e, name) => {
+		console.log(name);
+		if (name === 'password') {
+			setVisable((prev) => !prev);
+		} else {
+			setVisable2((prev) => !prev);
+		}
+	};
 
 	return (
 		<>
@@ -147,31 +159,47 @@ const Register = () => {
 						</div>
 						<div className='form-group'>
 							<label htmlFor='password'>Password</label>
-							<input
-								type='password'
-								required
-								autoComplete='off'
-								name='password'
-								id='passwordl'
-								placeholder='Enter password'
-								value={password}
-								onChange={(e) => handleChange(e, 'password')}
-							/>
+							<div className='input-container'>
+								<input
+									type={visable ? 'password' : 'text'}
+									required
+									autoComplete='off'
+									name='password'
+									id='passwordl'
+									placeholder='Enter password'
+									value={password}
+									onChange={(e) => handleChange(e, 'password')}
+								/>
+								<button
+									className='icon'
+									onClick={(e) => toggleType(e, 'password')}
+								>
+									{visable ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+								</button>
+							</div>
 							<small className='text-danger'>{passwordErr}</small>
 						</div>
 
 						<div className='form-group'>
 							<label htmlFor='password2'>Confirm Password</label>
-							<input
-								type='password'
-								required
-								autoComplete='off'
-								name='password2'
-								id='password2'
-								placeholder='Re-enter password'
-								value={password2}
-								onChange={(e) => handleChange(e, 'password2')}
-							/>
+							<div className='input-container'>
+								<input
+									type={visable2 ? 'password' : 'text'}
+									required
+									autoComplete='off'
+									name='password2'
+									id='password2'
+									placeholder='Re-enter password'
+									value={password2}
+									onChange={(e) => handleChange(e, 'password2')}
+								/>
+								<button
+									className='icon'
+									onClick={(e) => toggleType(e, 'password2')}
+								>
+									{visable2 ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+								</button>
+							</div>
 							<small className='text-danger'>{passwordErr2}</small>
 						</div>
 

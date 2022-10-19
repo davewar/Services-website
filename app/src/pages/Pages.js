@@ -10,7 +10,7 @@ import Home from '../components/home/Home';
 import Footer from '../components/Footer';
 
 import Login from '../components/accounts/Login';
-import Dashboard from '../components/accounts/Dashboard';
+import Dashboard from '../components/products/Dashboard';
 
 import ResetPassword from '../components/accounts/ResetPassword';
 import ActivateAccount from '../components/accounts/ActivateAccount';

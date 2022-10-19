@@ -28,13 +28,16 @@ module.exports.addEmail_post = async (req, res) => {
 
 		await newEmail.save();
 		// test. need ssl for gmail
-		let to = process.env.Mail_to;
-		let url = 'test';
-		let desc = 'hello world';
+		let to = process.env.DW_GMAIL;
+		let url = '';
+		let desc = 'Email received - DW Servicng';
 
-		// main(to, url, desc);
+		//let me know email recd
+		main(to, url, desc);
 
-		res.status(200).json('item added');
+		res.status(200).json({
+			msg: 'Thank you for your enquiry. We will be in contact with you shortly.',
+		});
 	} catch (err) {
 		console.log('dwerr', err);
 		return res.status(400).json({ msg: err.message });
@@ -49,28 +52,5 @@ module.exports.deleteEmail_delete = async (req, res) => {
 		res.status(200).json('item deleted');
 	} catch (err) {
 		return res.status(400).json({ msg: err.message });
-	}
-};
-
-// module.exports.updateEmail_post = async (req,res)=>{
-module.exports.amendEmail_put = async (req, res) => {
-	// console.log(req.params.id)
-	try {
-		const name = req.body.name;
-		const email = req.body.email;
-		const comment = req.body.comment;
-
-		await Email.findOneAndUpdate(
-			{ _id: req.params.id },
-			{
-				name,
-				email,
-				comment,
-			}
-		);
-
-		res.status(200).json('item updated');
-	} catch (err) {
-		return res.status(500).json({ msg: err.message });
 	}
 };

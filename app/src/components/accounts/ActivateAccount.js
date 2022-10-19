@@ -1,7 +1,47 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+
+import { useParams } from 'react-router-dom';
 
 const ActivateAccount = () => {
-	return <div>ActivateAccount</div>;
+	const [err, setErr] = useState('');
+	const [success, setSuccess] = useState('');
+
+	// /activation
+	const { id } = useParams();
+	console.log(id);
+
+	const validate = async (id) => {
+		try {
+			const res = await fetch('/user/activation', {
+				method: 'POST',
+				body: JSON.stringify({ accesstoken: id }),
+				headers: { 'Content-Type': 'application/json', credentials: 'include' },
+			});
+
+			const data = await res.json();
+			console.log('DW', data);
+
+			if (data.errors) {
+				setErr(data.errors);
+			} else {
+				setSuccess(data.msg);
+			}
+		} catch (err) {
+			console.log(err.message);
+			setErr(err.message);
+		}
+	};
+
+	useEffect(() => {
+		validate(id);
+	}, [id]);
+
+	return (
+		<center className='alert'>
+			<p className='text-danger'>{err}</p>
+			<p className='text-success'>{success}</p>
+		</center>
+	);
 };
 
 export default ActivateAccount;

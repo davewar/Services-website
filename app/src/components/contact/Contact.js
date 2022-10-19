@@ -10,9 +10,14 @@ const Contact = () => {
 	const [emailErr, setEmailErr] = useState('');
 	const [commentErr, setCommentErr] = useState('');
 
+	const [signInErr, setSignInErr] = useState('');
+	const [success, setSuccess] = useState('');
+
 	// email success
 
 	const handleChange = (e, item) => {
+		setSignInErr('');
+
 		/* eslint-disable */
 		const emailRegEx = RegExp(
 			/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -37,15 +42,39 @@ const Contact = () => {
 		}
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		// console.log(e);
 		// console.log(e.target.email.value);
 		e.preventDefault();
 
+		setSignInErr('');
+		setSuccess('');
+
 		if (name && email && comment && !nameErr && !emailErr && !commentErr) {
-			console.log('ok');
-		} else {
-			console.log('issue');
+			try {
+				const res = await fetch('api/email/', {
+					method: 'POST',
+					body: JSON.stringify({ name, email, comment }),
+					headers: {
+						'Content-Type': 'application/json',
+						credentials: 'include',
+					},
+				});
+
+				const resData = await res.json();
+
+				if (resData) {
+					console.log(resData);
+					setSuccess(resData.msg);
+					setName('');
+					setEmail('');
+					setComment('');
+				} else {
+					setSignInErr(resData.msg);
+				}
+			} catch (err) {
+				console.log('dw_error', err);
+			}
 		}
 	};
 
@@ -57,6 +86,18 @@ const Contact = () => {
 					<p>Free quotation on cost and time with no obligation</p>
 					<p>Why Wait? Get in touch !</p>
 				</div>
+
+				{signInErr && (
+					<div className='alert alert-danger text-center'>
+						<span className='text-danger text-capitalize'>{signInErr}</span>
+					</div>
+				)}
+
+				{success && (
+					<div className='alert alert-success text-center'>
+						<span className='text-success text-capitalize'>{success}</span>
+					</div>
+				)}
 
 				<div className='contact-container'>
 					<div className='form-container'>

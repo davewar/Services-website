@@ -2,17 +2,20 @@ import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './login.css';
 import { UserContext } from '../../contexts/user';
+import { AiOutlineEye } from 'react-icons/ai';
+import { AiOutlineEyeInvisible } from 'react-icons/ai';
 
 const Login = () => {
 	const { setAccessToken } = useContext(UserContext); //global user
 
-	const [email, setEmail] = useState('test@gmail.com');
+	const [email, setEmail] = useState('testfgfhhhghg@gmail.com');
 	const [emailErr, setEmailErr] = useState('');
-	const [password, setPassword] = useState('1111111');
+	const [password, setPassword] = useState('');
 	const [passwordErr, setPasswordErr] = useState('');
 	/* eslint-disable */
 	// const [accessToken, setAccessToken] = useState('');
 	const [signInErr, setSignInErr] = useState('');
+	const [visable, setVisable] = useState('false');
 
 	const navigate = useNavigate();
 
@@ -72,6 +75,10 @@ const Login = () => {
 		}
 	};
 
+	const toggleType = () => {
+		setVisable((prev) => !prev);
+	};
+
 	return (
 		<>
 			<div className='main-container'>
@@ -96,20 +103,26 @@ const Login = () => {
 								value={email}
 								onChange={(e) => handleChange(e, 'email')}
 							/>
+
 							<small className='text-danger'>{emailErr}</small>
 						</div>
 						<div className='form-group'>
 							<label htmlFor='password'>Password</label>
-							<input
-								type='password'
-								required
-								autoComplete='off'
-								name='password'
-								id='passwordl'
-								placeholder='Enter password'
-								value={password}
-								onChange={(e) => handleChange(e, 'password')}
-							/>
+							<div className='input-container'>
+								<input
+									type={visable ? 'password' : 'text'}
+									required
+									autoComplete='off'
+									name='password'
+									id='passwordl'
+									placeholder='Enter password'
+									value={password}
+									onChange={(e) => handleChange(e, 'password')}
+								/>
+								<button className='icon' onClick={toggleType}>
+									{visable ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+								</button>
+							</div>
 							<small className='text-danger'>{passwordErr}</small>
 						</div>
 

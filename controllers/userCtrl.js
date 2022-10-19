@@ -159,6 +159,7 @@ module.exports.signup_post = async (req, res) => {
 		const accesstoken = createToken(newUser._id);
 
 		const url = `${process.env.CLIENT_URL}/user/activate/${accesstoken}`;
+
 		//send email
 		main(
 			email,

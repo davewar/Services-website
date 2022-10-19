@@ -5,5 +5,5 @@ export const LOGINPATH = '/login';
 export const DASHBOARDPATH = '/dashboard';
 export const FORGOTPASSWORD = '/resetAccount';
 export const RESETPASSWORD = '/resetpassword';
-export const ACTIVATEACCOUNT = '/activateAccount';
+export const ACTIVATEACCOUNT = '/user/activate';
 export const CREATEACCOUNT = '/register';
