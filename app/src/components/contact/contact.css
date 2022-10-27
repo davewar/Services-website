@@ -5,7 +5,7 @@
 .contact-container {
 	padding: 1em;
 	border-radius: 0.5em;
-	outline: 2px dashed #007bff;
+	outline: 2px solid black;
 	margin-top: 1em;
 	margin-bottom: 1em;
 }
@@ -17,7 +17,7 @@
 	margin: 0 auto;
 }
 .contact-title > h4 {
-	color: var(--blue-color);
+	color: var(--contact-color);
 }
 
 .form-group {
@@ -68,14 +68,16 @@ input::placeholder {
 }
 
 .form-group:active label,
-.form-group:hover label {
-	color: #007bff;
+.form-group:hover label,
+.form-group:focus label {
+	color: var(--contact-color);
 }
 .form-group:active input,
 .form-group:hover input,
+.form-group:focus input,
 .form-group:hover textarea,
 .form-group:hover textarea {
-	border: 2px #007bff solid;
+	border: 2px var(--contact-color) solid;
 }
 
 .form-group > textarea {
@@ -84,10 +86,32 @@ input::placeholder {
 	font-size: 0.825rem;
 }
 
+/* forms */
+.alert {
+	padding: 5px;
+	margin: 5px;
+}
+.alert-danger {
+	color: red;
+	background-color: rgb(246, 196, 196);
+	font-weight: bold;
+}
+
 .text-danger {
-	color: rgb(247, 171, 171);
+	color: red;
 	margin-top: 10px;
 	font-weight: bold;
+}
+.text-success {
+	color: green;
+}
+
+.alert-success {
+	color: green;
+	background-color: rgb(169, 226, 169);
+}
+.text-capitalize {
+	text-transform: capitalize;
 }
 
 /* address details */
@@ -107,7 +131,7 @@ input::placeholder {
 	/* border: 2px red solid; */
 }
 .rightside-div > h4 {
-	color: var(--blue-color);
+	color: var(--contact-color);
 }
 
 .leftside-div {

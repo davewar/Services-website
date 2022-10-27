@@ -8,7 +8,7 @@ import { AiOutlineEyeInvisible } from 'react-icons/ai';
 const Login = () => {
 	const { setAccessToken } = useContext(UserContext); //global user
 
-	const [email, setEmail] = useState('testfgfhhhghg@gmail.com');
+	const [email, setEmail] = useState('');
 	const [emailErr, setEmailErr] = useState('');
 	const [password, setPassword] = useState('');
 	const [passwordErr, setPasswordErr] = useState('');
@@ -35,7 +35,7 @@ const Login = () => {
 		if (item === 'password') {
 			setPassword(e.target.value);
 			e.target.value.length < 3
-				? setPasswordErr('Password must be at least 3 characters!')
+				? setPasswordErr('Password must be at least 6 characters!')
 				: setPasswordErr('');
 		}
 	};
@@ -83,7 +83,7 @@ const Login = () => {
 		<>
 			<div className='main-container'>
 				<div className='sign-in'>
-					<h4 className='text-center'>Sign in</h4>
+					<h2 className='text-center'>Sign in</h2>
 
 					{signInErr && (
 						<div className='alert alert-danger text-center'>
@@ -102,6 +102,7 @@ const Login = () => {
 								placeholder='Enter email'
 								value={email}
 								onChange={(e) => handleChange(e, 'email')}
+								autoFocus
 							/>
 
 							<small className='text-danger'>{emailErr}</small>
@@ -127,13 +128,15 @@ const Login = () => {
 						</div>
 
 						<button type='submit' className='btn btn-blue' id='btn-save'>
-							Sign In
+							Submit
 						</button>
-					</form>
 
-					<Link className='forgot-pw' to='../resetaccount'>
-						Forgot Password
-					</Link>
+						<div className='forgot-pw'>
+							<Link className=' link-item underline' to='../resetaccount'>
+								Forgotten Password
+							</Link>
+						</div>
+					</form>
 				</div>
 			</div>
 		</>

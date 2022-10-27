@@ -7,39 +7,28 @@ const Home = () => {
 		<>
 			<main className='main-container'>
 				<section>
-					<h3 className='home-title'>
+					<h2 className='home-title'>
 						Technical solutions for your business needs
-					</h3>
+					</h2>
+
+					<div className='secondary-title'>
+						<p>We can help make life easier for you</p>
+						<ul>
+							<li>Design</li>
+							<li>Automation</li>
+							<li>Streamling</li>
+							<li>Reporting</li>
+							<li>Reduction in manual errors</li>
+							<li>Time saving efficiencies</li>
+						</ul>
+						<p>Small or large scale projects accepted.</p>
+					</div>
 
 					<div className='specials'>
 						<p>
 							Specialities : Excel, Access, VBA, SQL, Power Query, Power Pivot,
 							Power View, Business Objects, Qlikview and Website Development.
 						</p>
-					</div>
-					<div className='secondary-title'>
-						<h5>We can help make life easier for you</h5>
-						<ul>
-							<li>
-								<h5>* Design</h5>
-							</li>
-							<li>
-								<h5>* Automation</h5>
-							</li>
-							<li>
-								<h5>* Streamling</h5>
-							</li>
-							<li>
-								<h5>* Reporting</h5>
-							</li>
-							<li>
-								<h5>* Reduction in manual errors</h5>
-							</li>
-							<li>
-								<h5>* Time saving efficiencies</h5>
-							</li>
-						</ul>
-						<h5>Small or large scale projects accepted.</h5>
 					</div>
 
 					<div className='image-container'>

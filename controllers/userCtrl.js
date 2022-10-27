@@ -312,7 +312,7 @@ module.exports.activate_post = async (req, res) => {
 module.exports.reset_post = async (req, res) => {
 	try {
 		const { password, email, accesstoken } = req.body;
-
+		console.log('reset dw');
 		//form validations
 
 		if (!accesstoken || !email || !password)

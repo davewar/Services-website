@@ -1,13 +1,20 @@
 import React from 'react';
-import { Circle } from 'better-react-spinkit';
+import { SpinnerCircular } from 'spinners-react';
 
 const Loading = () => {
 	return (
 		<>
-			<center style={{ placeItems: 'center', height: '100vh' }}>
+			<center
+				style={{
+					display: 'flex',
+					flexDirection: 'column',
+					justifyContent: 'center',
+					height: '100vh',
+				}}
+			>
 				<div>
 					{/* eslint-disable next-line  */}
-					<Circle color='black' size={60} />
+					<SpinnerCircular color='blue' size={'150'} />
 				</div>
 			</center>
 		</>

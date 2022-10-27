@@ -52,6 +52,7 @@ const ForgotPassword = () => {
 					setSignInErr(data.errors);
 				} else {
 					setSuccess(data.msg);
+					setEmail('');
 				}
 			} catch (err) {
 				console.log('dw', err.message);
@@ -63,7 +64,7 @@ const ForgotPassword = () => {
 		<>
 			<div className='main-container'>
 				<div className='sign-in'>
-					<h4 className='text-center'>Reset Password</h4>
+					<h2 className='text-center'>Reset Password</h2>
 
 					{signInErr && (
 						<div className='alert alert-danger text-center'>
@@ -88,18 +89,20 @@ const ForgotPassword = () => {
 								placeholder='Enter email'
 								value={email}
 								onChange={(e) => handleChange(e, 'email')}
+								autoFocus
 							/>
 							<small className='text-danger'>{emailErr}</small>
 						</div>
 
 						<button type='submit' className='btn btn-blue' id='btn-save'>
-							Forgot Password
+							Submit
 						</button>
+						<div className='forgot-pw'>
+							<Link className=' link-item underline' to='../login'>
+								Log In
+							</Link>
+						</div>
 					</form>
-
-					<Link className='forgot-pw' to='../login'>
-						Log In
-					</Link>
 				</div>
 			</div>
 		</>

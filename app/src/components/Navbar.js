@@ -47,7 +47,24 @@ const Navbar = () => {
 				</div>
 
 				<div className='header-title main-container'>
-					<h2 className='title'>DW Servicing</h2>
+					<h1 className='title'>DW Servicing</h1>
+					<div className=''>
+						{!isLogged ? (
+							<Link className='link-item underline' to={Paths.LOGINPATH}>
+								Log In
+							</Link>
+						) : null}
+
+						{isLogged ? (
+							<Link
+								className='link-item underline'
+								onClick={logUserOut}
+								to={Paths.HOMEPATH}
+							>
+								Log Out
+							</Link>
+						) : null}
+					</div>
 				</div>
 
 				<nav className='navbar main-container '>
@@ -56,14 +73,14 @@ const Navbar = () => {
 						<div className='right'>
 							<div className='flex-item'>
 								{location.pathname !== Paths.HOMEPATH ? (
-									<Link className='link-item' to={Paths.HOMEPATH}>
+									<Link className='link-item underline' to={Paths.HOMEPATH}>
 										Home
 									</Link>
 								) : null}
 							</div>
 							<div className='flex-item'>
 								{location.pathname !== Paths.SERVICESPATH ? (
-									<Link className='link-item' to={Paths.SERVICESPATH}>
+									<Link className='link-item underline' to={Paths.SERVICESPATH}>
 										Services
 									</Link>
 								) : null}
@@ -75,24 +92,6 @@ const Navbar = () => {
 											Contact Us
 										</Link>
 									</button>
-								) : null}
-							</div>
-							<div className='flex-item'>
-								{!isLogged ? (
-									<Link className='link-item' to={Paths.LOGINPATH}>
-										Log In
-									</Link>
-								) : null}
-							</div>
-							<div className='flex-item'>
-								{isLogged ? (
-									<Link
-										className='link-item'
-										onClick={logUserOut}
-										to={Paths.HOMEPATH}
-									>
-										Log Out
-									</Link>
 								) : null}
 							</div>
 						</div>

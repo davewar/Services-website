@@ -4,7 +4,6 @@
 	},
 	"dependencies": {
 		"bcrypt": "^5.1.0",
-		"better-react-spinkit": "^2.0.4",
 		"cookie-parser": "^1.4.6",
 		"cors": "^2.8.5",
 		"dotenv": "^16.0.3",

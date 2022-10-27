@@ -10,10 +10,10 @@ const Box = () => {
 					<hr />
 				</div>
 				<div className='box-container'>
-					<div className='box'>
+					<div className='box '>
 						<img className='box-image' src='images/email.png' alt='email' />
 
-						<h5 className='box-title'>1. Contact Us</h5>
+						<h3 className='box-title'>1. Contact Us</h3>
 
 						<p className='box-p'>
 							Tell us what you need and we will find your solution.
@@ -26,7 +26,7 @@ const Box = () => {
 							src='images/handshake.png'
 							alt='handshake'
 						/>
-						<h5>2. Get an offer</h5>
+						<h3>2. Get an offer</h3>
 						<p>
 							Once we know exactly what you need, we will provide you with a
 							price and estimated time.
@@ -39,7 +39,7 @@ const Box = () => {
 							src='images/fast-delivery.png'
 							alt='fast-delivery'
 						/>
-						<h5>3. Delivery</h5>
+						<h3>3. Delivery</h3>
 						<p>
 							On agreement by you on cost and work requirements, we will then
 							proceed to build, test and demonstrate. Then its ready for you to

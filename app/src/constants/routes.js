@@ -4,6 +4,6 @@ export const CONTACTPATH = '/contact';
 export const LOGINPATH = '/login';
 export const DASHBOARDPATH = '/dashboard';
 export const FORGOTPASSWORD = '/resetAccount';
-export const RESETPASSWORD = '/resetpassword';
+export const RESETPASSWORD = '/reset_password';
 export const ACTIVATEACCOUNT = '/user/activate';
 export const CREATEACCOUNT = '/register';

@@ -1,9 +1,6 @@
 .forgot-pw {
-	color: #007bff;
-}
-
-.sign-in {
-	/* border: 2px solid red; */
+	margin-top: 1em;
+	color: var(--contact-color);
 }
 
 @media screen and (min-width: 576px) {

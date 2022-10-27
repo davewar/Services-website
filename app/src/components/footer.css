@@ -1,6 +1,5 @@
 .footer {
-	background-color: var(--footer-color);
-	background-color: #cdfcf0;
+	background-color: var(--darkblue);
 	margin-top: 5%;
 }
 
@@ -9,8 +8,15 @@
 	margin: 0% auto;
 	text-align: center;
 	padding: 2rem;
-	/* background-color: red; */
 }
 .footer-box > button {
 	margin-top: 0;
+}
+
+.footer-box * {
+	color: var(--white);
+}
+
+.footer-title {
+	margin-top: 1em;
 }

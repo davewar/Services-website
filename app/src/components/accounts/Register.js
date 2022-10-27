@@ -9,7 +9,7 @@ const Register = () => {
 	const [name, setName] = useState('');
 	const [nameErr, setNameErr] = useState('');
 
-	const [email, setEmail] = useState('test1@gmail.com');
+	const [email, setEmail] = useState('');
 	const [emailErr, setEmailErr] = useState('');
 	const [password, setPassword] = useState('');
 	const [passwordErr, setPasswordErr] = useState('');
@@ -49,13 +49,13 @@ const Register = () => {
 		if (item === 'password') {
 			setPassword(e.target.value);
 			e.target.value.length < 3
-				? setPasswordErr('Password must be at least 3 characters!')
+				? setPasswordErr('Password must be at least 6 characters!')
 				: setPasswordErr('');
 		}
 		if (item === 'password2') {
 			setPassword2(e.target.value);
 
-			password !== password2
+			e.target.value !== password
 				? setPasswordErr2('Passwords are not the same')
 				: setPasswordErr2('');
 		}
@@ -94,6 +94,10 @@ const Register = () => {
 				} else {
 					if (data.msg) {
 						setSuccess(data.msg);
+						setName('');
+						setEmail('');
+						setPassword('');
+						setPassword2('');
 					}
 				}
 			} catch (err) {
@@ -103,7 +107,7 @@ const Register = () => {
 	};
 	//toggle password
 	const toggleType = (e, name) => {
-		console.log(name);
+		// console.log(name);
 		if (name === 'password') {
 			setVisable((prev) => !prev);
 		} else {
@@ -115,7 +119,7 @@ const Register = () => {
 		<>
 			<div className='main-container'>
 				<div className='sign-in'>
-					<h4 className='text-center'>Register</h4>
+					<h2 className='text-center'>Register</h2>
 
 					{signInErr && (
 						<div className='alert alert-danger text-center'>
@@ -140,6 +144,7 @@ const Register = () => {
 								placeholder='Enter full name'
 								value={name}
 								onChange={(e) => handleChange(e, 'name')}
+								autoFocus
 							/>
 							<small className='text-danger'>{nameErr}</small>
 						</div>
@@ -206,11 +211,12 @@ const Register = () => {
 						<button type='submit' className='btn btn-blue' id='btn-save'>
 							Register
 						</button>
+						<div className='forgot-pw'>
+							<Link className=' link-item underline' to='../resetaccount'>
+								Forgot Password
+							</Link>
+						</div>
 					</form>
-
-					<Link className='forgot-pw' to='../resetaccount'>
-						Forgot Password
-					</Link>
 				</div>
 			</div>
 		</>

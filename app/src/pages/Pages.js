@@ -16,6 +16,7 @@ import ResetPassword from '../components/accounts/ResetPassword';
 import ActivateAccount from '../components/accounts/ActivateAccount';
 import Register from '../components/accounts/Register';
 import ForgotPassword from '../components/accounts/ForgotPassword';
+import Error from '../components/Error';
 
 const Pages = () => {
 	return (
@@ -45,7 +46,8 @@ const Pages = () => {
 
 					<Route path={Paths.DASHBOARDPATH} element={<Dashboard />}></Route>
 
-					<Route path='*' element={<Home />} />
+					{/* <Route path='*' element={<Home />} /> */}
+					<Route path='*' element={<Error />} />
 				</Routes>
 
 				<Footer />

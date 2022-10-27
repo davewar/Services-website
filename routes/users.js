@@ -10,7 +10,7 @@ router.route('/logout').get(userCtrl.logout_get);
 
 router.route('/activation').post(userCtrl.activate_post);
 router.route('/forgot').post(userCtrl.forgot_post);
-// router.route('/reset').post(userCtrl.reset_post);
+router.route('/reset').post(userCtrl.reset_post);
 
 router.route('/refresh_token').get(userCtrl.refreshToken_get);
 router.route('/infor').get(auth, userCtrl.getUser_get);

@@ -7,8 +7,8 @@ const Services = () => {
 		<>
 			<main className='main-container'>
 				<section>
-					<article>
-						<h4 className='center '>Welcome to DW Servicing</h4>
+					<article className='intro-services'>
+						<h2 className='services-title'>Welcome to DW Servicing</h2>
 						<p>
 							Our goal is to make your life easier by creating, designing new or
 							amending your existing proceseses in order to streamline, increase
@@ -19,14 +19,14 @@ const Services = () => {
 							Tell us what you need and let us show you how we can help. We
 							provide a free quotation with no obligation.
 						</p>
-						<p>What we can help with</p>
+						<p>We can help you with</p>
 					</article>
 				</section>
 
 				<section className='services-container'>
 					<article className='services-item'>
 						<div className='service-split'>
-							<h5 className='service-title'>Excel:</h5>
+							<h3 className='service-title'>Excel</h3>
 							<div className='services-image'>
 								<img src='images/xls-icon-3379.png' alt='excel' />
 							</div>
@@ -41,14 +41,14 @@ const Services = () => {
 								<li>Automation</li>
 								<li>Debugging errors and issues with existing process</li>
 								<li>Dashboard Design & Implementation</li>
-								<li>Plus more upon request</li>
+								<li>Plus more</li>
 							</ul>
 						</div>
 					</article>
 
 					<article className='services-item'>
 						<div className='service-split'>
-							<h5 className='service-title'>Access:</h5>
+							<h3 className='service-title'>Access</h3>
 							<div className='services-image'>
 								<img src='images/access.png' alt='access' />
 							</div>
@@ -71,7 +71,7 @@ const Services = () => {
 
 					<article className='services-item'>
 						<div className='service-split'>
-							<h5 className='service-title'>BI Tools:</h5>
+							<h3 className='service-title'>BI Tools</h3>
 							<div className='services-image'>
 								<img src='images/power-bl.png' alt='bi' />
 							</div>
@@ -81,16 +81,14 @@ const Services = () => {
 								<li>
 									Design new / amend Reports, dashboards and data visualisations
 								</li>
-								<li>
-									Add / Amend functionality - Extract, Transform and Load (ETL)
-								</li>
+								<li>Add / Amend functionality - Extract, Transform and Load</li>
 							</ul>
 						</div>
 					</article>
 
 					<article className='services-item'>
 						<div className='service-split'>
-							<h5 className='service-title'>Web Development:</h5>
+							<h3 className='service-title'>Website Dev</h3>
 							<div className='services-image'>
 								<img src='images/coding.png' alt='bi' />
 							</div>
