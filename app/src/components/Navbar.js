@@ -35,19 +35,10 @@ const Navbar = () => {
 	return (
 		<>
 			<header>
-				<div className='wave-container'>
-					<div className='cloud-left'></div>
-					<div>
-						<img
-							className='cloud-right'
-							src='images/vector1.svg'
-							alt='vector1'
-						/>
-					</div>
-				</div>
+				<img className='cloud-img' src='images/vector1.svg' alt='vector1' />
 
 				<div className='header-title main-container'>
-					<h1 className='title'>DW Servicing</h1>
+					<h1 className='title'>DW-Serv</h1>
 					<div className=''>
 						{!isLogged ? (
 							<Link className='link-item underline' to={Paths.LOGINPATH}>

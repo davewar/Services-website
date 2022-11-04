@@ -16,7 +16,7 @@
 	padding: 1em 0;
 	margin: 0 auto;
 }
-.contact-title > h4 {
+.contact-title > h3 {
 	color: var(--contact-color);
 }
 
@@ -34,7 +34,7 @@ textarea {
 	color: var(--secondary-color);
 	font-size: 0.825rem;
 	font-weight: bold;
-	transition: all 0.125s;
+	transition: all 0.3s;
 	/* around the border */
 	outline: none;
 }
@@ -130,7 +130,7 @@ input::placeholder {
 	margin-bottom: 1em;
 	/* border: 2px red solid; */
 }
-.rightside-div > h4 {
+.rightside-div > h3 {
 	color: var(--contact-color);
 }
 

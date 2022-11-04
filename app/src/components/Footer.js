@@ -2,17 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import * as Paths from '../constants/routes';
 import './footer.css';
-
-const scrollToTop = () => {
-	window.scrollTo(0, 0);
-};
+import { scrollToTop } from '../utils/helpers';
 
 const Footer = () => {
+	let dte = new Date();
 	return (
 		<>
-			<footer className='footer'>
+			<footer id='footer'>
 				<div className='main-container'>
-					<div className='footer-box'>
+					<div id='footer-box'>
 						<h3>Contact us today for a free consultation & quote</h3>
 						<p>What are you waiting for?</p>
 
@@ -24,7 +22,10 @@ const Footer = () => {
 							</div>
 						</button>
 
-						<h1 className='footer-title'>DW Servicing</h1>
+						<h1 id='footer-title'>DW-Serv</h1>
+						<p>
+							Copyright &copy; {new Date().getFullYear()}. All rights Reserved
+						</p>
 					</div>
 				</div>
 			</footer>

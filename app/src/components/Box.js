@@ -6,14 +6,14 @@ const Box = () => {
 		<>
 			<section className='main-container'>
 				<div className='free-quote'>
-					<p>FREE QUOTATION</p>
+					<p>Free Quotation</p>
 					<hr />
 				</div>
 				<div className='box-container'>
 					<div className='box '>
 						<img className='box-image' src='images/email.png' alt='email' />
 
-						<h3 className='box-title'>1. Contact Us</h3>
+						<p className='box-title'>1. Contact Us</p>
 
 						<p className='box-p'>
 							Tell us what you need and we will find your solution.
@@ -26,7 +26,7 @@ const Box = () => {
 							src='images/handshake.png'
 							alt='handshake'
 						/>
-						<h3>2. Get an offer</h3>
+						<p className='box-title'> 2. Get an offer</p>
 						<p>
 							Once we know exactly what you need, we will provide you with a
 							price and estimated time.
@@ -39,7 +39,7 @@ const Box = () => {
 							src='images/fast-delivery.png'
 							alt='fast-delivery'
 						/>
-						<h3>3. Delivery</h3>
+						<p className='box-title'>3. Delivery</p>
 						<p>
 							On agreement by you on cost and work requirements, we will then
 							proceed to build, test and demonstrate. Then its ready for you to

@@ -8,7 +8,7 @@ const ActivateAccount = () => {
 
 	// /activation
 	const { id } = useParams();
-	console.log(id);
+	// console.log(id);
 
 	const validate = async (id) => {
 		try {

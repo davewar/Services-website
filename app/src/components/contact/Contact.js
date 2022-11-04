@@ -36,7 +36,7 @@ const Contact = () => {
 
 		if (item === 'comment') {
 			setComment(e.target.value);
-			comment.length < 3
+			comment.length < 10
 				? setCommentErr('Please provide more details')
 				: setCommentErr('');
 		}
@@ -82,7 +82,7 @@ const Contact = () => {
 		<>
 			<section className='main-container'>
 				<div className='contact-info'>
-					<h4>Tell us more about your project</h4>
+					<h2>Tell us more about your project</h2>
 					<p>Free quotation on cost and time with no obligation</p>
 					<p>Why Wait? Get in touch !</p>
 				</div>
@@ -102,7 +102,7 @@ const Contact = () => {
 				<div className='contact-container'>
 					<div className='form-container'>
 						<div className='contact-title'>
-							<h4>Contact us</h4>
+							<h3>Contact us</h3>
 						</div>
 						<form className='contact-form' onSubmit={handleSubmit}>
 							<div className='form-group'>
@@ -167,7 +167,7 @@ const Contact = () => {
 							/>
 						</div>
 						<div className='rightside-div'>
-							<h4>Contact Us</h4>
+							<h3>Contact Us</h3>
 							<p>
 								DW Servicing
 								<br></br>20 Sussex Road

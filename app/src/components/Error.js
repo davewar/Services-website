@@ -4,7 +4,9 @@ const Error = () => {
 	return (
 		<center>
 			<h2>Page not found</h2>
-			<Link to='/'>Back Home</Link>
+			<Link className='link-item underline' to='/'>
+				Back Home
+			</Link>
 		</center>
 	);
 };

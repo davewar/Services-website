@@ -5,10 +5,10 @@ import Box from '../Box';
 const Services = () => {
 	return (
 		<>
-			<main className='main-container'>
+			<main className='main-container services-main'>
 				<section>
 					<article className='intro-services'>
-						<h2 className='services-title'>Welcome to DW Servicing</h2>
+						<h1 className='services-title'>Welcome to DW Servicing</h1>
 						<p>
 							Our goal is to make your life easier by creating, designing new or
 							amending your existing proceseses in order to streamline, increase
@@ -17,9 +17,8 @@ const Services = () => {
 						</p>
 						<p>
 							Tell us what you need and let us show you how we can help. We
-							provide a free quotation with no obligation.
+							provide a free quotation with no obligation for all our services.
 						</p>
-						<p>We can help you with</p>
 					</article>
 				</section>
 
@@ -55,7 +54,7 @@ const Services = () => {
 						</div>
 						<div className='services-text'>
 							<ul>
-								<li>Develop new Access databases</li>
+								<li>Design and creation of new Access databases</li>
 								<li>
 									Add new functionality to existing databases, new reports and
 									forms for data entry
