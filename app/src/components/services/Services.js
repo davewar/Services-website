@@ -1,10 +1,29 @@
 import React from 'react';
 import './services.css';
 import Box from '../Box';
+import Seo from '../seo/Seo';
+import { metaData } from '../../constants/metaData';
 
 const Services = () => {
 	return (
 		<>
+			{metaData &&
+				metaData
+					.filter((item) => item.page === 'services')
+					.map((i) => {
+						return (
+							<Seo
+								key={i.id}
+								title={i.title}
+								description={i.description}
+								name={i.name}
+								type={i.type}
+								url={i.url}
+								image={i.image}
+							/>
+						);
+					})}
+
 			<main className='main-container services-main'>
 				<section>
 					<article className='intro-services'>

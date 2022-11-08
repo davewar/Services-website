@@ -1,13 +1,29 @@
-.contact-info {
+#contact-info {
 	text-align: center;
-	margin-top: 1em;
+	margin-top: 0.25em;
 }
-.contact-container {
-	padding: 1em;
-	border-radius: 0.5em;
-	outline: 2px solid black;
-	margin-top: 1em;
-	margin-bottom: 1em;
+
+#contact-title {
+	margin-top: 0.25em;
+	margin-bottom: 0.25em;
+	font-weight: 700;
+	color: var(--black);
+}
+
+#free-title {
+	/* margin-bottom: 0; */
+	max-width: 80%;
+	margin: 1em auto;
+}
+#contact-container {
+	margin-top: 0em;
+	margin-bottom: 0.25em;
+}
+
+#contact-form-title {
+	text-align: center;
+	/* color: var(--contact-color); */
+	color: var(--dark-blue);
 }
 
 /* form  */
@@ -35,7 +51,6 @@ textarea {
 	font-size: 0.825rem;
 	font-weight: bold;
 	transition: all 0.3s;
-	/* around the border */
 	outline: none;
 }
 
@@ -116,8 +131,9 @@ input::placeholder {
 
 /* address details */
 .address {
-	width: 100%;
-	margin-top: 2em;
+	width: 50%;
+	margin-top: 1em;
+	/* border: 2px blue solid; */
 }
 
 .address-box {
@@ -126,16 +142,17 @@ input::placeholder {
 	width: 100%;
 	justify-content: center;
 	align-items: center;
-	gap: 3em;
-	margin-bottom: 1em;
-	/* border: 2px red solid; */
+	/* gap: 0.5em; */
+	margin-bottom: 0.5em;
+	/* border: 2px blue solid; */
 }
 .rightside-div > h3 {
-	color: var(--contact-color);
+	color: var(--dark-blue);
 }
 
 .leftside-div {
 	width: 20%;
+
 	/* border: 2px solid red; */
 }
 
@@ -143,26 +160,97 @@ input::placeholder {
 	display: block;
 }
 
+.img-color {
+	filter: grayscale(100%);
+}
+
 .rightside-div {
 	width: 80%;
+	margin-left: 1.5em;
 	/* border: 2px solid red; */
 }
 
 @media screen and (min-width: 576px) {
 	.leftside-div {
-		width: 10%;
-	}
-	.address-box {
-		gap: 2em;
+		width: 15%;
 	}
 
 	.rightside-div {
-		width: 90%;
+		width: 85%;
+	}
+
+	#contact-title-sub {
 	}
 }
 
-@media screen and (min-width: 769px) and (max-width: 1024px) {
+@media screen and (min-width: 769px) and (max-width: 999px) {
+	.leftside-div {
+		width: 14%;
+	}
+
+	.rightside-div {
+		width: 75%;
+	}
 }
 
-@media screen and (min-width: 1176px) {
+@media screen and (min-width: 1000px) {
+	.contact-grid {
+		display: grid;
+		grid-template-columns: 1fr 2fr;
+		gap: 1.5rem;
+		grid-template-areas:
+			'one one'
+			'x two'
+			'three two'
+			'three two';
+	}
+
+	#contact-info {
+		grid-area: one;
+	}
+
+	#free-title {
+		text-align: left;
+		margin: 1em 0;
+		width: 100%;
+		max-width: 24ch;
+	}
+	#contact-title-sub {
+		text-align: left;
+		max-width: 40ch;
+	}
+
+	#contact-container {
+		grid-area: two;
+	}
+
+	.address {
+		grid-area: three;
+		width: 100%;
+	}
+}
+
+@media screen and (min-width: 1200px) {
+	#free-title {
+		text-align: left;
+		max-width: 30ch;
+	}
+	#contact-title-sub {
+		margin-bottom: 0;
+		text-align: left;
+		max-width: 50ch;
+	}
+}
+
+@media screen and (min-width: 1400px) {
+	#free-title {
+		text-align: left;
+		margin-top: 1em;
+		max-width: initial;
+		/* margin-bottom: 0; */
+	}
+	#contact-title-sub {
+		text-align: left;
+		max-width: initial;
+	}
 }

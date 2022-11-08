@@ -5,13 +5,35 @@ import { scrollToTop } from '../../utils/helpers';
 
 import { Link } from 'react-router-dom';
 
+import Seo from '../seo/Seo';
+import { metaData } from '../../constants/metaData';
+
 const Home = () => {
 	return (
 		<>
+			{metaData &&
+				metaData
+					.filter((item) => item.page === 'home')
+					.map((i) => {
+						return (
+							<Seo
+								key={i.id}
+								title={i.title}
+								description={i.description}
+								name={i.name}
+								type={i.type}
+								url={i.url}
+								image={i.image}
+							/>
+						);
+					})}
+
 			<main className='main-container'>
-				<section>
-					<h1 id='home-title'>Technical solutions for your business needs</h1>
-					<div id='secondary-title'>
+				<section id='home-section'>
+					<h1 id='home-title'>
+						Technical solutions for your <br></br> business needs
+					</h1>
+					<div className='secondary-title'>
 						<h2>We can help make life easier for you</h2>
 						<ul>
 							<li className='list-tick'>
@@ -64,7 +86,7 @@ const Home = () => {
 								<p className='list-p'>Time saving efficiencies</p>
 							</li>
 						</ul>
-						<h3>Small and large scale projects accepted.</h3>
+						<h3 className='small-p'>Small and large scale projects accepted</h3>
 					</div>
 					<div id='specials'>
 						<p>

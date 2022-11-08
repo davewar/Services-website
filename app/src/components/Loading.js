@@ -13,7 +13,6 @@ const Loading = () => {
 				}}
 			>
 				<div>
-					{/* eslint-disable next-line  */}
 					<SpinnerCircular color='blue' size={'150'} />
 				</div>
 			</center>

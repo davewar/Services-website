@@ -5,7 +5,6 @@ import './footer.css';
 import { scrollToTop } from '../utils/helpers';
 
 const Footer = () => {
-	let dte = new Date();
 	return (
 		<>
 			<footer id='footer'>
@@ -24,7 +23,7 @@ const Footer = () => {
 
 						<h1 id='footer-title'>DW-Serv</h1>
 						<p>
-							Copyright &copy; {new Date().getFullYear()}. All rights Reserved
+							Copyright &copy; {new Date().getFullYear()}. All rights Reserved.
 						</p>
 					</div>
 				</div>

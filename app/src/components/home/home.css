@@ -1,6 +1,5 @@
 #home-title {
-	padding-top: 1rem;
-	padding-bottom: 1rem;
+	margin-top: 0.2rem;
 	font-weight: 700;
 	text-align: center;
 	position: relative;
@@ -19,7 +18,7 @@
 	}
 }
 
-#secondary-title {
+.secondary-title {
 	width: 100%;
 	text-align: center;
 	font-weight: bold;
@@ -47,6 +46,10 @@
 
 .list-p {
 	margin-bottom: 0;
+}
+
+.small-p {
+	margin-top: 0.5em;
 }
 
 /* more info */
@@ -116,18 +119,6 @@
 	}
 }
 
-@media screen and (min-width: 1000px) {
-	/* pc pic */
-	#image-container {
-		margin-top: 0;
-		width: 45%;
-		margin: auto;
-		/* max-width: 600px; */
-	}
-}
-
-/* end */
-
 /* list of services + anim */
 #specials {
 	width: 90%;
@@ -139,6 +130,7 @@
 	animation-fill-mode: forwards;
 }
 
+/* anim */
 @keyframes mySpecials {
 	0% {
 		left: -200%;
@@ -152,22 +144,76 @@
 
 /* ipad mini */
 @media (min-width: 481px) and (max-width: 768px) {
-	.home-title {
-		padding-top: 0.5em;
-		padding-bottom: 0.5em;
+	#home-title {
+		margin-top: 0.5em;
 	}
 }
 
-@media screen and (min-width: 1200px) {
-	/* pc pic */
-	.image-container > img {
-		max-width: 900px;
+@media screen and (min-width: 1000px) {
+	#home-title,
+	.secondary-title {
+		text-align: left;
+	}
+
+	#home-title {
+		font-size: 2.6rem;
+	}
+
+	.list-tick {
+		justify-content: flex-start;
+	}
+	.small-p,
+	.secondary-title > h2 {
+		max-width: 25ch;
+	}
+
+	#home-section {
+		position: relative;
+	}
+
+	#image-container {
+		position: absolute;
+		top: 24%;
+		right: -2%;
+		max-height: 600px;
+		width: 65%;
+		margin-left: 20%;
+	}
+	#specials {
+		margin-top: 5rem;
 	}
 }
 
-/* anim */
+@media screen and (min-width: 1240px) {
+	#image-container {
+		top: 16%;
+		right: -5%;
+		width: 65%;
+	}
+}
 
-.specials > p {
-	color: var(--light-black);
-	font-weight: bold;
+@media screen and (min-width: 1412px) {
+	#image-container {
+		position: absolute;
+		top: 9%;
+		right: -0%;
+		/* width: 63%; */
+	}
+}
+
+@media screen and (min-width: 1670px) {
+	#image-container {
+		position: absolute;
+		top: 10%;
+		right: 10%;
+		width: 100%;
+	}
+	.small-p,
+	.secondary-title > h2 {
+		max-width: initial;
+	}
+
+	#specials {
+		margin-top: 7rem;
+	}
 }

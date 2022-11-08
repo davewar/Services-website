@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import './contact.css';
 
+import Seo from '../seo/Seo';
+// seo data
+import { metaData } from '../../constants/metaData';
+
 const Contact = () => {
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
@@ -80,11 +84,34 @@ const Contact = () => {
 
 	return (
 		<>
-			<section className='main-container'>
-				<div className='contact-info'>
-					<h2>Tell us more about your project</h2>
-					<p>Free quotation on cost and time with no obligation</p>
-					<p>Why Wait? Get in touch !</p>
+			{metaData &&
+				metaData
+					.filter((item) => item.page === 'contact')
+					.map((i) => {
+						return (
+							<Seo
+								key={i.id}
+								title={i.title}
+								description={i.description}
+								name={i.name}
+								type={i.type}
+								url={i.url}
+								image={i.image}
+							/>
+						);
+					})}
+
+			<section className='main-container contact-grid'>
+				<div id='contact-info'>
+					<h1 id='contact-title'>Tell us more about your project</h1>
+					<h3 id='free-title'>
+						Free quotation on cost and time with no obligation
+					</h3>
+
+					<p id='contact-title-sub'>
+						Please fill out the quick form and we will be in touch with lighting
+						speed.
+					</p>
 				</div>
 
 				{signInErr && (
@@ -99,11 +126,10 @@ const Contact = () => {
 					</div>
 				)}
 
-				<div className='contact-container'>
+				<div id='contact-container'>
 					<div className='form-container'>
-						<div className='contact-title'>
-							<h3>Contact us</h3>
-						</div>
+						<h3 id='contact-form-title'>Contact us</h3>
+
 						<form className='contact-form' onSubmit={handleSubmit}>
 							<div className='form-group'>
 								<label htmlFor='name'>Name:</label>
@@ -167,9 +193,9 @@ const Contact = () => {
 							/>
 						</div>
 						<div className='rightside-div'>
-							<h3>Contact Us</h3>
+							{/* <h3>Contact Us</h3> */}
 							<p>
-								DW Servicing
+								DW-Serv
 								<br></br>20 Sussex Road
 								<br></br>Erith
 								<br></br>Kent
@@ -189,11 +215,11 @@ const Contact = () => {
 
 					<div className='address-box'>
 						<div className='leftside-div'>
-							<img src='images/email.png' alt='email' />
+							<img className='img-color' src='images/email.png' alt='email' />
 						</div>
 
 						<div className='rightside-div'>
-							<p>dwservicing@gmail.com</p>
+							<p>dw-serv@gmail.com</p>
 						</div>
 					</div>
 				</div>

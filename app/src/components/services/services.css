@@ -8,8 +8,8 @@ section {
 }
 
 .services-title {
-	margin-top: 1.5em;
-	margin-bottom: 1em;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
 	text-align: center;
 }
 .services-item {
@@ -118,7 +118,13 @@ li {
 	}
 }
 
-/* @media screen and (min-width: 1350px) {
+@media screen and (min-width: 1400px) {
+	.intro-services {
+		max-width: 80ch;
+	}
+}
+
+/* @media screen and (min-width: 1200px) {
 	.services-container {
 		display: grid;
 		grid-template-columns: 1fr 1fr;

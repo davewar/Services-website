@@ -8,13 +8,8 @@ import { Link, useLocation } from 'react-router-dom';
 const Navbar = () => {
 	const location = useLocation(null);
 
-	const {
-		isLogged,
-		setIsLogged,
-		setIsAdmin,
-		setAccessToken,
-		setUser,
-	} = useContext(UserContext);
+	const { isLogged, setIsLogged, setIsAdmin, setAccessToken, setUser } =
+		useContext(UserContext);
 
 	const logUserOut = async () => {
 		try {
