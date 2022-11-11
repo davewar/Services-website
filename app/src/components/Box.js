@@ -1,5 +1,9 @@
 import React from 'react';
 import './box.css';
+// images
+import emailImg from '../assets/images/email.png';
+import handsImg from '../assets/images/handshake.png';
+import lorryImg from '../assets/images/fast-delivery.png';
 
 const Box = () => {
 	return (
@@ -11,10 +15,13 @@ const Box = () => {
 				</div>
 				<div className='box-container'>
 					<div className='box '>
-						<img className='box-image' src='images/email.png' alt='email' />
-
+						<img
+							className='box-image'
+							loading='lazy'
+							src={emailImg}
+							alt='email'
+						/>
 						<p className='box-title'>1. Contact Us</p>
-
 						<p className='box-p'>
 							Tell us what you need and we will find your solution.
 						</p>
@@ -23,7 +30,8 @@ const Box = () => {
 					<div className='box'>
 						<img
 							className='box-image'
-							src='images/handshake.png'
+							loading='lazy'
+							src={handsImg}
 							alt='handshake'
 						/>
 						<p className='box-title'> 2. Get an offer</p>
@@ -36,7 +44,8 @@ const Box = () => {
 					<div className='box'>
 						<img
 							className='box-image'
-							src='images/fast-delivery.png'
+							loading='lazy'
+							src={lorryImg}
 							alt='fast-delivery'
 						/>
 						<p className='box-title'>3. Delivery</p>

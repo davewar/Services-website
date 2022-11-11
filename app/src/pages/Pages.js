@@ -18,11 +18,15 @@ import Register from '../components/accounts/Register';
 import ForgotPassword from '../components/accounts/ForgotPassword';
 import Error from '../components/Error';
 
+import PageSeo from '../components/seo/PageSeo';
+
 const Pages = () => {
 	return (
 		<>
 			<BrowserRouter>
+				<PageSeo />
 				<Navbar />
+
 				<Routes>
 					<Route path={Paths.HOMEPATH} element={<Home />} />
 					<Route path={Paths.SERVICESPATH} element={<Services />}></Route>

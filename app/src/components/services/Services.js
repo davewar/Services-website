@@ -1,38 +1,25 @@
 import React from 'react';
 import './services.css';
 import Box from '../Box';
-import Seo from '../seo/Seo';
-import { metaData } from '../../constants/metaData';
+// images
+import excelImg from '../../assets/images/xls-icon-3379.png';
+import accessImg from '../../assets/images/access.png';
+import powerImg from '../../assets/images/power-bl.png';
+import webImg from '../../assets/images/coding.png';
 
 const Services = () => {
 	return (
 		<>
-			{metaData &&
-				metaData
-					.filter((item) => item.page === 'services')
-					.map((i) => {
-						return (
-							<Seo
-								key={i.id}
-								title={i.title}
-								description={i.description}
-								name={i.name}
-								type={i.type}
-								url={i.url}
-								image={i.image}
-							/>
-						);
-					})}
-
 			<main className='main-container services-main'>
 				<section>
 					<article className='intro-services'>
 						<h1 className='services-title'>Welcome to DW Servicing</h1>
 						<p>
-							Our goal is to make your life easier by creating, designing new or
-							amending your existing proceseses in order to streamline, increase
-							efficiency, time save, accurate reporting and eliminate manual
-							processing errors.
+							We are located in South East Kent and our goal is to make our
+							clients life easier by creating, designing new or amending your
+							existing proceseses in order to streamline, increase efficiency,
+							time save, accurate reporting and eliminate manual processing
+							errors.
 						</p>
 						<p>
 							Tell us what you need and let us show you how we can help. We
@@ -46,7 +33,7 @@ const Services = () => {
 						<div className='service-split'>
 							<h3 className='service-title'>Excel</h3>
 							<div className='services-image'>
-								<img src='images/xls-icon-3379.png' alt='excel' />
+								<img src={excelImg} alt='excel' />
 							</div>
 						</div>
 						<div className='services-text'>
@@ -68,7 +55,7 @@ const Services = () => {
 						<div className='service-split'>
 							<h3 className='service-title'>Access</h3>
 							<div className='services-image'>
-								<img src='images/access.png' alt='access' />
+								<img src={accessImg} alt='access' />
 							</div>
 						</div>
 						<div className='services-text'>
@@ -91,7 +78,7 @@ const Services = () => {
 						<div className='service-split'>
 							<h3 className='service-title'>BI Tools</h3>
 							<div className='services-image'>
-								<img src='images/power-bl.png' alt='bi' />
+								<img src={powerImg} alt='Business Inteligence' />
 							</div>
 						</div>
 						<div className='services-text'>
@@ -108,7 +95,7 @@ const Services = () => {
 						<div className='service-split'>
 							<h3 className='service-title'>Website Dev</h3>
 							<div className='services-image'>
-								<img src='images/coding.png' alt='bi' />
+								<img src={webImg} alt='bi' />
 							</div>
 						</div>
 						<div className='services-text'>

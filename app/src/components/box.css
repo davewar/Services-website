@@ -13,7 +13,6 @@
 }
 
 .box {
-	background-color: var(--box-color);
 	border: solid 1px black;
 	/* width */
 	flex-basis: 100%;
@@ -45,7 +44,8 @@
 }
 
 .box:hover {
-	background-color: white;
+	background-color: var(--box-color);
+	color: var(--white);
 	transform: scale(1.05);
 	box-shadow: 0rem 0rem 10px black;
 }
@@ -72,7 +72,6 @@
 	.box {
 		flex-basis: 100%;
 		padding: 1.25em;
-		/* background-color: blue; */
 	}
 	.box-image {
 		width: 25%;

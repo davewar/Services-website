@@ -2,32 +2,13 @@ import React from 'react';
 import Box from '../Box';
 import './home.css';
 import { scrollToTop } from '../../utils/helpers';
+import pcImg from '../../assets/images/sysadmin_03.jpg';
 
 import { Link } from 'react-router-dom';
-
-import Seo from '../seo/Seo';
-import { metaData } from '../../constants/metaData';
 
 const Home = () => {
 	return (
 		<>
-			{metaData &&
-				metaData
-					.filter((item) => item.page === 'home')
-					.map((i) => {
-						return (
-							<Seo
-								key={i.id}
-								title={i.title}
-								description={i.description}
-								name={i.name}
-								type={i.type}
-								url={i.url}
-								image={i.image}
-							/>
-						);
-					})}
-
 			<main className='main-container'>
 				<section id='home-section'>
 					<h1 id='home-title'>
@@ -40,7 +21,7 @@ const Home = () => {
 								<img
 									className='img-tick'
 									src='images/tick.png'
-									alt='green tick'
+									alt='green tick to advising we provide this service'
 								/>
 
 								<p className='list-p'>Design</p>
@@ -49,7 +30,7 @@ const Home = () => {
 								<img
 									className='img-tick'
 									src='images/tick.png'
-									alt='green tick'
+									alt='green tick to advising we provide this service'
 								/>
 								<p className='list-p'>Automation</p>
 							</li>
@@ -57,7 +38,7 @@ const Home = () => {
 								<img
 									className='img-tick'
 									src='images/tick.png'
-									alt='green tick'
+									alt='green tick to advising we provide this service'
 								/>
 								<p className='list-p'>Streamling</p>
 							</li>
@@ -65,7 +46,7 @@ const Home = () => {
 								<img
 									className='img-tick'
 									src='images/tick.png'
-									alt='green tick'
+									alt='green tick to advising we provide this service'
 								/>
 								<p className='list-p'>Reporting</p>
 							</li>
@@ -73,7 +54,7 @@ const Home = () => {
 								<img
 									className='img-tick'
 									src='images/tick.png'
-									alt='green tick'
+									alt='green tick to advising we provide this service'
 								/>
 								<p className='list-p'>Reduction in manual errors</p>
 							</li>
@@ -81,7 +62,7 @@ const Home = () => {
 								<img
 									className='img-tick'
 									src='images/tick.png'
-									alt='green tick'
+									alt='green tick to advising we provide this service'
 								/>
 								<p className='list-p'>Time saving efficiencies</p>
 							</li>
@@ -102,7 +83,7 @@ const Home = () => {
 					</div>
 
 					<div id='image-container'>
-						<img id='image-pc' src='images/sysadmin_03.jpg' alt='pc' />
+						<img id='image-pc' src={pcImg} alt='pc' />
 						<p className='overlay'>Simple, low cost and effective solutions</p>
 					</div>
 				</section>

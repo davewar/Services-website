@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import './contact.css';
-
-import Seo from '../seo/Seo';
-// seo data
-import { metaData } from '../../constants/metaData';
+// images
+import locationImg from '../../assets/images/location.png';
+import phoneImg from '../../assets/images/phone-call.png';
+import emailImg from '../../assets/images/email.png';
 
 const Contact = () => {
 	const [name, setName] = useState('');
@@ -84,23 +84,6 @@ const Contact = () => {
 
 	return (
 		<>
-			{metaData &&
-				metaData
-					.filter((item) => item.page === 'contact')
-					.map((i) => {
-						return (
-							<Seo
-								key={i.id}
-								title={i.title}
-								description={i.description}
-								name={i.name}
-								type={i.type}
-								url={i.url}
-								image={i.image}
-							/>
-						);
-					})}
-
 			<section className='main-container contact-grid'>
 				<div id='contact-info'>
 					<h1 id='contact-title'>Tell us more about your project</h1>
@@ -132,7 +115,9 @@ const Contact = () => {
 
 						<form className='contact-form' onSubmit={handleSubmit}>
 							<div className='form-group'>
-								<label htmlFor='name'>Name:</label>
+								<label htmlFor='name' type='text'>
+									Name:
+								</label>
 								<input
 									type='text'
 									name='name'
@@ -148,7 +133,9 @@ const Contact = () => {
 							</div>
 
 							<div className='form-group'>
-								<label htmlFor='email'>Email:</label>
+								<label htmlFor='email' type='email'>
+									Email:
+								</label>
 								<input
 									type='email'
 									name='comment'
@@ -162,7 +149,9 @@ const Contact = () => {
 							</div>
 
 							<div className='form-group'>
-								<label>Briefly describe what you need:</label>
+								<label htmlFor='comment' type='text'>
+									Briefly describe what you need:
+								</label>
 								<textarea
 									rows='4'
 									cols='50'
@@ -186,14 +175,9 @@ const Contact = () => {
 				<div className='address'>
 					<div className='address-box'>
 						<div className='leftside-div'>
-							<img
-								className='img-bg'
-								src='images/location.png'
-								alt='location'
-							/>
+							<img className='img-bg' src={locationImg} alt='location' />
 						</div>
 						<div className='rightside-div'>
-							{/* <h3>Contact Us</h3> */}
 							<p>
 								DW-Serv
 								<br></br>20 Sussex Road
@@ -206,7 +190,7 @@ const Contact = () => {
 
 					<div className='address-box'>
 						<div className='leftside-div'>
-							<img src='images/phone-call.png' alt='phone' />
+							<img src={phoneImg} alt='phone' />
 						</div>
 						<div className='rightside-div'>
 							<p>07956 891404</p>
@@ -215,7 +199,7 @@ const Contact = () => {
 
 					<div className='address-box'>
 						<div className='leftside-div'>
-							<img className='img-color' src='images/email.png' alt='email' />
+							<img className='img-color' src={emailImg} alt='email' />
 						</div>
 
 						<div className='rightside-div'>

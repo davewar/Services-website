@@ -178,6 +178,7 @@ const Register = () => {
 								/>
 								<button
 									className='icon'
+									aria-label='click to change password visibility'
 									onClick={(e) => toggleType(e, 'password')}
 								>
 									{visable ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
@@ -201,6 +202,7 @@ const Register = () => {
 								/>
 								<button
 									className='icon'
+									aria-label='click to change password visibility'
 									onClick={(e) => toggleType(e, 'password2')}
 								>
 									{visable2 ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}

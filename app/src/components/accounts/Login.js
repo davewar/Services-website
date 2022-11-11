@@ -122,7 +122,11 @@ const Login = () => {
 									value={password}
 									onChange={(e) => handleChange(e, 'password')}
 								/>
-								<button className='icon' onClick={toggleType}>
+								<button
+									className='icon'
+									onClick={toggleType}
+									aria-label='click to change password visibility'
+								>
 									{visable ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
 								</button>
 							</div>

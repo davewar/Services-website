@@ -29,7 +29,7 @@ const main = (emailaddress, url, msg) => {
 		if (err) {
 			console.log(err.message);
 		} else {
-			console.log('email sent');
+			// console.log('email sent');
 		}
 	});
 };

@@ -59,14 +59,22 @@ const Navbar = () => {
 						<div className='right'>
 							<div className='flex-item'>
 								{location.pathname !== Paths.HOMEPATH ? (
-									<Link className='link-item underline' to={Paths.HOMEPATH}>
+									<Link
+										className='link-item underline'
+										to={Paths.HOMEPATH}
+										aria-label='link to home website page'
+									>
 										Home
 									</Link>
 								) : null}
 							</div>
 							<div className='flex-item'>
 								{location.pathname !== Paths.SERVICESPATH ? (
-									<Link className='link-item underline' to={Paths.SERVICESPATH}>
+									<Link
+										className='link-item underline'
+										to={Paths.SERVICESPATH}
+										aria-label='link to Services website page'
+									>
 										Services
 									</Link>
 								) : null}
@@ -74,7 +82,11 @@ const Navbar = () => {
 							<div className='flex-item'>
 								{location.pathname !== Paths.CONTACTPATH ? (
 									<button className='contactbtn'>
-										<Link className='link btn' to={Paths.CONTACTPATH}>
+										<Link
+											className='link btn'
+											to={Paths.CONTACTPATH}
+											aria-label='link to contact us website page'
+										>
 											Contact Us
 										</Link>
 									</button>

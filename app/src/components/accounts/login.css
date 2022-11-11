@@ -2,11 +2,14 @@
 	margin-top: 1em;
 	color: var(--contact-color);
 }
+.text-center {
+	text-align: center;
+}
 
 @media screen and (min-width: 576px) {
 	.sign-in {
 		width: 80%;
-		margin: 0 auto;
+		margin: auto;
 		max-width: var(--fixed-width);
 	}
 }
