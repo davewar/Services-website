@@ -4,7 +4,7 @@ require('dotenv').config();
 // https://myaccount.google.com/lesssecureapps
 // https://www.freecodecamp.org/news/use-nodemailer-to-send-emails-from-your-node-js-server/
 
-const main = (emailaddress, url, msg) => {
+const main = (emailaddress, url, msg, text, html) => {
 	//  console.log(emailaddress, url,msg)
 
 	// create reusable transporter object using the default SMTP transport
@@ -17,11 +17,11 @@ const main = (emailaddress, url, msg) => {
 	});
 
 	let mailOptions = {
-		from: '"DW Servicing" <DW Servicing.com>', // sender address
+		from: '"DW-Serv" <DW-Serv.com>', // sender address
 		to: emailaddress, // list of receivers
 		subject: msg, // Subject line
-		text: '', // plain text body
-		html: `${url}`, // html body
+		text: text ? text : '', // plain text body
+		html: html ? `${url}` : '', // html body
 	};
 
 	// send mail with defined transport object

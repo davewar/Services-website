@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import * as Paths from '../constants/routes';
 import './navbar.css';
+import vector1Img from '../assets/images/vector1.svg';
+
 import { UserContext } from '../contexts/user';
 
 import { Link, useLocation } from 'react-router-dom';
@@ -8,8 +10,13 @@ import { Link, useLocation } from 'react-router-dom';
 const Navbar = () => {
 	const location = useLocation(null);
 
-	const { isLogged, setIsLogged, setIsAdmin, setAccessToken, setUser } =
-		useContext(UserContext);
+	const {
+		isLogged,
+		setIsLogged,
+		setIsAdmin,
+		setAccessToken,
+		setUser,
+	} = useContext(UserContext);
 
 	const logUserOut = async () => {
 		try {
@@ -30,7 +37,7 @@ const Navbar = () => {
 	return (
 		<>
 			<header>
-				<img className='cloud-img' src='images/vector1.svg' alt='vector1' />
+				<img className='cloud-img' src={vector1Img} alt='vector1' />
 
 				<div className='header-title main-container'>
 					<h1 className='title'>DW-Serv</h1>

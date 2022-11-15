@@ -244,13 +244,45 @@ input::placeholder {
 
 @media screen and (min-width: 1400px) {
 	#free-title {
-		text-align: left;
 		margin-top: 1em;
 		max-width: initial;
 		/* margin-bottom: 0; */
+		text-align: center;
 	}
 	#contact-title-sub {
-		text-align: left;
 		max-width: initial;
+		text-align: center;
+	}
+}
+
+/* map */
+
+#section-map {
+	overflow: hidden;
+	margin-top: 0.5em;
+}
+#google-map {
+	position: relative;
+	overflow: hidden;
+	padding-bottom: 50%;
+	height: 0;
+}
+
+#google-map iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100% !important;
+	height: 100% !important;
+	border: none;
+}
+
+/* #map-frame {
+	width: 100%;
+} */
+
+@media screen and (min-width: 1000px) {
+	#section-map {
+		display: none;
 	}
 }

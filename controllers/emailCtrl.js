@@ -28,12 +28,23 @@ module.exports.addEmail_post = async (req, res) => {
 
 		await newEmail.save();
 		// test. need ssl for gmail
-		let to = process.env.DW_GMAIL;
+
 		let url = '';
-		let desc = 'Email received - DW Servicng';
+		let desc = 'Confirmation of your enquiry';
+		let text = `
+		Thank you for contacting us!
+
+		We typically respond within 48 hours if a reply is required.
+
+		Regards
+		DW-Serv
+		
+		`;
+
+		email = 'davewarwicker1@gmail.com';
 
 		//let me know email recd
-		main(to, url, desc);
+		main(email, url, desc, text);
 
 		res.status(200).json({
 			msg: 'Thank you for your enquiry. We will be in contact with you shortly.',

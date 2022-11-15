@@ -67,7 +67,7 @@ module.exports.login_post = async (req, res) => {
 				);
 				return res.status(400).json({
 					errors:
-						'Incorrect login x3 - Account Locked. Please request a new password',
+						'Incorrect login - The Account has been Locked. Please reset your password',
 				});
 			} else {
 				await User.findOneAndUpdate(
@@ -101,6 +101,7 @@ module.exports.login_post = async (req, res) => {
 			const accesstoken = createToken(user._id);
 			const url = `${process.env.CLIENT_URL}/user/activate/${accesstoken}`;
 			// main(email, url, 'DWSHOP - Please activate your account');
+
 			return res.status(400).json({
 				errors:
 					'An email has just been sent to you, please activate your account using the link sent.',
@@ -158,14 +159,26 @@ module.exports.signup_post = async (req, res) => {
 		//create tokens
 		const accesstoken = createToken(newUser._id);
 
-		const url = `${process.env.CLIENT_URL}/user/activate/${accesstoken}`;
+		const x = `${process.env.CLIENT_URL}/user/activate/${accesstoken}`;
+
+		let desc =
+			'DW-Serv. Please activate your account - link valid for 10 minutes';
+
+		let url = '';
+		let text = `
+		Please use the below link to activate your password.
+
+		The link is only valid for 10 minutes.
+
+		${x}
+
+		Regards
+		DW-Serv
+		
+		`;
 
 		//send email
-		main(
-			email,
-			url,
-			'DWSHOP. Please activate your account - link valid for 10 minutes'
-		);
+		main(email, url, desc, text);
 
 		res.status(200).send({
 			msg: 'Please check your email and activate your account using the link',
@@ -232,7 +245,7 @@ module.exports.getUser_get = async (req, res) => {
 
 module.exports.forgot_post = async (req, res) => {
 	try {
-		const { email } = req.body;
+		let { email } = req.body;
 
 		if (!email)
 			return res
@@ -247,21 +260,35 @@ module.exports.forgot_post = async (req, res) => {
 		const user = await User.findOne({ email });
 
 		if (!user)
-			return res.status(400).json({ errors: 'Account does not exists' });
+			return res.status(400).json({ errors: 'Account does not exist' });
 
 		//create tokens
 		const accesstoken = createToken(user._id);
-		const url = `${process.env.CLIENT_URL}/reset_password/${accesstoken}`;
-		main(
-			email,
-			url,
-			'DWSHOP. Please reset your password - link valid for 10 minutes'
-		);
+
+		const x = `${process.env.CLIENT_URL}/reset_password/${accesstoken}`;
+
+		let desc =
+			"DW-Serv. Please reset your password - link valid for 10 minutes'";
+
+		let url = '';
+		let text = `
+		Please use the below link to reset your password.
+
+		The link is only valid for 10 minutes.
+
+		${x}
+
+		Regards
+		DW-Serv
+		
+		`;
+
+		main(email, url, desc, text);
 
 		//all gd
 
 		res.status(200).send({
-			msg: 'Please check your email and reset your password using the link',
+			msg: 'Please check your email and reset your password using the link. You may need to check your spam/junk folder.',
 		});
 	} catch (err) {}
 };
@@ -368,7 +395,7 @@ module.exports.reset_post = async (req, res) => {
 		);
 
 		res.json({
-			msg: 'Password successfully changed! Please signin to use your account',
+			msg: 'Password successfully changed! Please log in to use your account',
 		});
 	} catch (err) {
 		res.status(400).json({ errors: err.message });

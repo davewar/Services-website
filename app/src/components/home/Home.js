@@ -3,10 +3,18 @@ import Box from '../Box';
 import './home.css';
 import { scrollToTop } from '../../utils/helpers';
 import pcImg from '../../assets/images/sysadmin_03.jpg';
+import tickImg from '../../assets/images/tick.png';
+import ReactGA from 'react-ga4';
 
 import { Link } from 'react-router-dom';
 
 const Home = () => {
+	const onClick = () => {
+		ReactGA.event({
+			category: 'clicked_servicesBtn_category',
+			action: 'clicked_servicesBtn_action',
+		});
+	};
 	return (
 		<>
 			<main className='main-container'>
@@ -20,7 +28,7 @@ const Home = () => {
 							<li className='list-tick'>
 								<img
 									className='img-tick'
-									src='images/tick.png'
+									src={tickImg}
 									alt='green tick to advising we provide this service'
 								/>
 
@@ -29,7 +37,7 @@ const Home = () => {
 							<li className='list-tick'>
 								<img
 									className='img-tick'
-									src='images/tick.png'
+									src={tickImg}
 									alt='green tick to advising we provide this service'
 								/>
 								<p className='list-p'>Automation</p>
@@ -37,7 +45,7 @@ const Home = () => {
 							<li className='list-tick'>
 								<img
 									className='img-tick'
-									src='images/tick.png'
+									src={tickImg}
 									alt='green tick to advising we provide this service'
 								/>
 								<p className='list-p'>Streamling</p>
@@ -45,7 +53,7 @@ const Home = () => {
 							<li className='list-tick'>
 								<img
 									className='img-tick'
-									src='images/tick.png'
+									src={tickImg}
 									alt='green tick to advising we provide this service'
 								/>
 								<p className='list-p'>Reporting</p>
@@ -53,7 +61,7 @@ const Home = () => {
 							<li className='list-tick'>
 								<img
 									className='img-tick'
-									src='images/tick.png'
+									src={tickImg}
 									alt='green tick to advising we provide this service'
 								/>
 								<p className='list-p'>Reduction in manual errors</p>
@@ -61,7 +69,7 @@ const Home = () => {
 							<li className='list-tick'>
 								<img
 									className='img-tick'
-									src='images/tick.png'
+									src={tickImg}
 									alt='green tick to advising we provide this service'
 								/>
 								<p className='list-p'>Time saving efficiencies</p>
@@ -75,7 +83,7 @@ const Home = () => {
 							Pivot, Power View, Business Objects and Qlikview.
 						</p>
 
-						<button id='more-button' onClick={scrollToTop}>
+						<button id='more-button' onClick={(() => scrollToTop, onClick)}>
 							<Link id='more-btn' to='/services'>
 								More Info
 							</Link>

@@ -176,10 +176,11 @@
 	#image-container {
 		position: absolute;
 		top: 24%;
-		right: -2%;
+		right: -5%;
 		max-height: 600px;
-		width: 65%;
+		width: 60%;
 		margin-left: 20%;
+		/* border: solid; */
 	}
 	#specials {
 		margin-top: 5rem;

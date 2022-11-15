@@ -100,7 +100,8 @@ const Services = () => {
 						</div>
 						<div className='services-text'>
 							<ul>
-								<li>Design new / amend websites</li>
+								<li>Website Design</li>
+								<li>Website Development (new / amend) </li>
 								<li>Add / Amend functionality</li>
 							</ul>
 						</div>

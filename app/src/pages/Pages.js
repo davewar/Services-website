@@ -16,15 +16,19 @@ import ResetPassword from '../components/accounts/ResetPassword';
 import ActivateAccount from '../components/accounts/ActivateAccount';
 import Register from '../components/accounts/Register';
 import ForgotPassword from '../components/accounts/ForgotPassword';
-import Error from '../components/Error';
 
+import Error from '../components/Error';
 import PageSeo from '../components/seo/PageSeo';
+import Consent from '../components/cookieConsent/Consent';
 
 const Pages = () => {
+	// true=[prod]
+	const cookiesOn = false;
 	return (
 		<>
 			<BrowserRouter>
 				<PageSeo />
+
 				<Navbar />
 
 				<Routes>
@@ -53,6 +57,8 @@ const Pages = () => {
 					{/* <Route path='*' element={<Home />} /> */}
 					<Route path='*' element={<Error />} />
 				</Routes>
+
+				{cookiesOn ? <Consent /> : null}
 
 				<Footer />
 			</BrowserRouter>
