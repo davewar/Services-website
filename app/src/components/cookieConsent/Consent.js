@@ -11,7 +11,8 @@ import { useLocation } from 'react-router-dom';
 const Consent = () => {
 	const id = 'G-G4916C4E0D';
 	// true=[prod]
-	const ga4Live = false;
+	// const ga4Live = false;
+	const ga4Live = process.env.REACT_APP_GA4LIVE;
 	const [showCookieCompo, setShowCookieComp] = useState(false); // delay the component from showing on screen, you wont see animations otherwise on mobile view
 	const [show, setShow] = useState(false); // show cookie policy
 	// cookie consent
@@ -49,7 +50,7 @@ const Consent = () => {
 				ReactGA.send({ hitType: 'pageview', page: location.pathname });
 			}
 		}
-	}, [location]);
+	}, [location, ga4Live]);
 
 	const onChange = (e, name) => {
 		if (name === 'analytical') {

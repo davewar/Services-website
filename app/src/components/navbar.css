@@ -101,23 +101,24 @@ button {
 		flex-direction: row;
 	}
 	.left {
-		width: 50%;
+		width: 40%;
 	}
 	.right {
-		width: 50%;
+		width: 60%;
 		display: flex;
 		flex-direction: row;
 		justify-content: flex-end;
 		align-items: center;
+		/* border: solid; */
 	}
 
 	.flex-item {
-		margin: 2% 5% 2% 0;
+		/* margin: 2% 5% 2% 0; */
 	}
 	/* select a flex item with a flex item to the left only */
 	.flex-item + .flex-item {
 		margin-right: 0%;
-		margin-left: 5%;
+		margin-left: 3%;
 	}
 }
 

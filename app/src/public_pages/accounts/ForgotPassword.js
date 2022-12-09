@@ -18,12 +18,6 @@ const ForgotPassword = () => {
 		//clear
 		setSignInErr('');
 
-		/* eslint-disable */
-
-		// const emailRegEx = RegExp(
-		// 	/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-		// );
-
 		if (item === 'email') {
 			setEmail(e.target.value);
 			!emailRegEx.test(email) ? setEmailErr('Invalid Email!') : setEmailErr('');
@@ -57,7 +51,8 @@ const ForgotPassword = () => {
 					setEmail('');
 				}
 			} catch (err) {
-				console.log('dw', err.message);
+				console.log('dw error message forgot pw:', err.message);
+				setSignInErr('No Server Response');
 			}
 		}
 	};

@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './login.css';
 import { UserContext } from '../../contexts/user';
 import { AiOutlineEye } from 'react-icons/ai';
@@ -7,18 +7,18 @@ import { AiOutlineEyeInvisible } from 'react-icons/ai';
 import { emailRegEx } from '../../utils/helpers';
 
 const Login = () => {
-	const { setAccessToken } = useContext(UserContext); //global user
+	const { setAccessToken, setRole } = useContext(UserContext); //global user
 
 	const [email, setEmail] = useState('');
 	const [emailErr, setEmailErr] = useState('');
 	const [password, setPassword] = useState('');
 	const [passwordErr, setPasswordErr] = useState('');
-	/* eslint-disable */
-	// const [accessToken, setAccessToken] = useState('');
 	const [signInErr, setSignInErr] = useState('');
 	const [visable, setVisable] = useState('false');
 
 	const navigate = useNavigate();
+	const location = useLocation();
+	// const from = location.state?.from?.pathname || '/';
 
 	const handleChange = (e, item) => {
 		//clear
@@ -26,14 +26,27 @@ const Login = () => {
 
 		/* eslint-disable */
 
-		// const emailRegEx = RegExp(
-		// 	/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-		// );
-
 		if (item === 'email') {
 			setEmail(e.target.value);
 			!emailRegEx.test(email) ? setEmailErr('Invalid Email!') : setEmailErr('');
 		}
+
+		// To use in Prod
+
+		// if (item === 'password') {
+		// 	setPassword(e.target.value);
+
+		// 	let pwdValid = !pwdRegex.test(password);
+		// 	console.log(pwdValid);
+
+		// 	!pwdRegex.test(password)
+		// 		? setPasswordErr(
+		// 				'Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character'
+		// 		  )
+		// 		: setPasswordErr('');
+		// }
+
+		// To use in test
 		if (item === 'password') {
 			setPassword(e.target.value);
 			e.target.value.length < 3
@@ -61,18 +74,18 @@ const Login = () => {
 				const data = await res.json();
 				// console.log(data);
 
-				if (data.errors) {
-					setSignInErr(data.errors);
-				} else {
-					if (data.user) {
-						localStorage.setItem('firstlogin', true);
-						setAccessToken(data.accesstoken);
+				if (data.user) {
+					localStorage.setItem('firstlogin', true);
+					setAccessToken(data.accesstoken);
+					setRole(data.user.role);
 
-						navigate('../dashboard');
-					}
+					navigate('../dashboard');
+				} else if (data.errors) {
+					setSignInErr(data.errors);
 				}
 			} catch (err) {
-				console.log('dw', err.message);
+				console.log('dw error message login:', err.message);
+				setSignInErr('No Server Response');
 			}
 		}
 	};

@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 const Error = () => {
 	return (
 		<center>
-			<h2>Page not found</h2>
+			<h1>Oops!</h1>
+			<p>Page Not Found</p>
 			<Link className='link-item underline' to='/'>
-				Back Home
+				Visit Our Homepage
 			</Link>
 		</center>
 	);

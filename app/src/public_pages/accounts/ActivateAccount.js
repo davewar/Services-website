@@ -27,8 +27,8 @@ const ActivateAccount = () => {
 				setSuccess(data.msg);
 			}
 		} catch (err) {
-			console.log(err.message);
-			setErr(err.message);
+			console.log('dw error message forgot pw:', err.message);
+			setErr('No Server Response');
 		}
 	};
 

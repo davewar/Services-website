@@ -10,29 +10,8 @@ import { Link, useLocation } from 'react-router-dom';
 const Navbar = () => {
 	const location = useLocation(null);
 
-	const {
-		isLogged,
-		setIsLogged,
-		setIsAdmin,
-		setAccessToken,
-		setUser,
-	} = useContext(UserContext);
-
-	const logUserOut = async () => {
-		try {
-			//remove cookie
-			await fetch('user/logout');
-			//remove ls
-			localStorage.removeItem('firstlogin');
-
-			setIsLogged(false);
-			setIsAdmin(false);
-			setAccessToken('');
-			setUser('');
-		} catch (err) {
-			console.log(err);
-		}
-	};
+	const { isLogged, isAdmin, isUser, isEditor, logUserOut } =
+		useContext(UserContext);
 
 	return (
 		<>
@@ -64,6 +43,20 @@ const Navbar = () => {
 					<div className='nav-container'>
 						<div className='left'></div>
 						<div className='right'>
+							{isLogged && (
+								<div className='flex-item'>
+									{location.pathname !== Paths.DASHBOARDPATH ? (
+										<Link
+											className='link-item underline'
+											to={Paths.DASHBOARDPATH}
+											aria-label='link to dashboard website page'
+										>
+											Dashboard
+										</Link>
+									) : null}
+								</div>
+							)}
+
 							<div className='flex-item'>
 								{location.pathname !== Paths.HOMEPATH ? (
 									<Link
@@ -75,6 +68,7 @@ const Navbar = () => {
 									</Link>
 								) : null}
 							</div>
+
 							<div className='flex-item'>
 								{location.pathname !== Paths.SERVICESPATH ? (
 									<Link

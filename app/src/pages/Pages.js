@@ -1,66 +1,105 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Contact from '../components/contact/Contact';
-import Services from '../components/services/Services';
-import Navbar from '../components/Navbar';
 import * as Paths from '../constants/routes';
 
-import Home from '../components/home/Home';
+// public
+import Layout from '../components/Layout'; // pageSeo + navbar {children} + cookieconent + footer
 
-import Footer from '../components/Footer';
+import Home from '../public_pages/home/Home';
+import Contact from '../public_pages/contact/Contact';
+import Services from '../public_pages/services/Services';
 
-import Login from '../components/accounts/Login';
-import Dashboard from '../components/products/Dashboard';
+import Login from '../public_pages/accounts/Login';
+import ResetPassword from '../public_pages/accounts/ResetPassword';
+import ActivateAccount from '../public_pages/accounts/ActivateAccount';
+import Register from '../public_pages/accounts/Register';
+import ForgotPassword from '../public_pages/accounts/ForgotPassword';
 
-import ResetPassword from '../components/accounts/ResetPassword';
-import ActivateAccount from '../components/accounts/ActivateAccount';
-import Register from '../components/accounts/Register';
-import ForgotPassword from '../components/accounts/ForgotPassword';
+// Private views
+import Dashboard from '../private_pages/Dashboard'; // main Private page containing links
+// protection implementation
+import RequireAuth from '../components/RequireAuth'; // << User logged in, Do they acccess role to view page?
+import UnAuthorized from '../components/UnAuthorised'; //  <<  view displayed if not allowed to view the page
+// content
+import Emails from '../private_pages/emails/Emails';
+import Admin from '../private_pages/admin/Admin';
+import Projects from '../private_pages/projects/Projects';
+import Users from '../private_pages/users/Users';
 
+// No page found
 import Error from '../components/Error';
-import PageSeo from '../components/seo/PageSeo';
-import Consent from '../components/cookieConsent/Consent';
+
+const ROLES = {
+	User: 0,
+	Editor: 1,
+	Admin: 2,
+};
 
 const Pages = () => {
-	// true=[prod]
-	const cookiesOn = false;
 	return (
 		<>
 			<BrowserRouter>
-				<PageSeo />
-
-				<Navbar />
-
 				<Routes>
-					<Route path={Paths.HOMEPATH} element={<Home />} />
-					<Route path={Paths.SERVICESPATH} element={<Services />}></Route>
-					<Route path={Paths.CONTACTPATH} element={<Contact />}></Route>
+					<Route path={Paths.HOMEPATH} element={<Layout />}>
+						{/**********************public routes***************************** */}
 
-					{/* admin */}
-					<Route path={Paths.CREATEACCOUNT} element={<Register />}></Route>
-					<Route path={Paths.LOGINPATH} element={<Login />}></Route>
-					<Route
-						path={Paths.FORGOTPASSWORD}
-						element={<ForgotPassword />}
-					></Route>
-					<Route
-						path={Paths.RESETPASSWORD + '/:id'}
-						element={<ResetPassword />}
-					></Route>
-					<Route
-						path={Paths.ACTIVATEACCOUNT + '/:id'}
-						element={<ActivateAccount />}
-					></Route>
+						<Route index path='/' element={<Home />} />
+						<Route path={Paths.SERVICESPATH} element={<Services />}></Route>
+						<Route path={Paths.CONTACTPATH} element={<Contact />}></Route>
 
-					<Route path={Paths.DASHBOARDPATH} element={<Dashboard />}></Route>
+						{/* public login + password routes */}
+						<Route path={Paths.CREATEACCOUNT} element={<Register />}></Route>
+						<Route path={Paths.LOGINPATH} element={<Login />}></Route>
+						<Route
+							path={Paths.FORGOTPASSWORD}
+							element={<ForgotPassword />}
+						></Route>
+						<Route
+							path={Paths.RESETPASSWORD + '/:id'}
+							element={<ResetPassword />}
+						></Route>
+						<Route
+							path={Paths.ACTIVATEACCOUNT + '/:id'}
+							element={<ActivateAccount />}
+						></Route>
 
-					{/* <Route path='*' element={<Home />} /> */}
-					<Route path='*' element={<Error />} />
+						{/**********************protected routes***************************** */}
+
+						<Route path='/unauthorized' element={<UnAuthorized />} />
+
+						<Route
+							element={
+								<RequireAuth
+									allowedRoles={[ROLES.Editor, ROLES.User, ROLES.Admin]}
+								/>
+							}
+						>
+							<Route path={Paths.DASHBOARDPATH} element={<Dashboard />}></Route>
+							<Route path={'/emails'} element={<Emails />}></Route>
+							<Route path={'/users'} element={<Users />}></Route>
+						</Route>
+
+						{/* editor and admin only */}
+						<Route
+							element={
+								<RequireAuth allowedRoles={[ROLES.Editor, ROLES.Admin]} />
+							}
+						>
+							<Route path={'/projects'} element={<Projects />}></Route>
+						</Route>
+
+						{/* admin only */}
+						<Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+							<Route path={'/admin'} element={<Admin />}></Route>
+						</Route>
+
+						{/**********************protected routes end***************************** */}
+
+						{/* page not found */}
+						<Route path='*' element={<Error />} />
+						<Route />
+					</Route>
 				</Routes>
-
-				{cookiesOn ? <Consent /> : null}
-
-				<Footer />
 			</BrowserRouter>
 		</>
 	);

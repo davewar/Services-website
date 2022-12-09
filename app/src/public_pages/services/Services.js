@@ -1,6 +1,6 @@
 import React from 'react';
 import './services.css';
-import Box from '../Box';
+import Box from '../../components/Box';
 // images
 import excelImg from '../../assets/images/xls-icon-3379.png';
 import accessImg from '../../assets/images/access.png';

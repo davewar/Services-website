@@ -1,5 +1,5 @@
 import React from 'react';
-import Box from '../Box';
+import Box from '../../components/Box';
 import './home.css';
 import { scrollToTop } from '../../utils/helpers';
 import pcImg from '../../assets/images/sysadmin_03.jpg';

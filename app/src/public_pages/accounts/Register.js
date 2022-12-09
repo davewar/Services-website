@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './login.css';
 import { AiOutlineEye } from 'react-icons/ai';
 import { AiOutlineEyeInvisible } from 'react-icons/ai';
@@ -24,17 +24,11 @@ const Register = () => {
 	const [visable, setVisable] = useState('false');
 	const [visable2, setVisable2] = useState('false');
 
-	const navigate = useNavigate();
-
 	const handleChange = (e, item) => {
 		//clear
 		setSignInErr('');
 
 		/* eslint-disable */
-
-		// const emailRegEx = RegExp(
-		// 	/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-		// );
 
 		if (item === 'name') {
 			setName(e.target.value);
@@ -47,17 +41,31 @@ const Register = () => {
 			setEmail(e.target.value);
 			!emailRegEx.test(email) ? setEmailErr('Invalid Email!') : setEmailErr('');
 		}
+
+		// 	let pwdValid = !pwdRegex.test(password);
+		// 	console.log(pwdValid);
+
+		// 	!pwdRegex.test(password)
+		// 		? setPasswordErr(
+		// 				'Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character'
+		// 		  )
+		// 		: setPasswordErr('');
+		// }
+
 		if (item === 'password') {
 			setPassword(e.target.value);
-			e.target.value.length < 3
-				? setPasswordErr('Password must be at least 6 characters!')
-				: setPasswordErr('');
+
+			e.target.value.length > 3
+				? setPasswordErr('')
+				: setPasswordErr('Password must be at least 3 characters!');
 		}
+
 		if (item === 'password2') {
 			setPassword2(e.target.value);
 
-			e.target.value !== password
-				? setPasswordErr2('Passwords are not the same')
+			password === password2
+				? // e.target.value !== password
+				  setPasswordErr2('Passwords are not the same')
 				: setPasswordErr2('');
 		}
 	};
@@ -102,7 +110,8 @@ const Register = () => {
 					}
 				}
 			} catch (err) {
-				console.log('dw', err.message);
+				console.log('dw error message register:', err.message);
+				setSignInErr('No Server Response');
 			}
 		}
 	};

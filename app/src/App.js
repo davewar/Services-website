@@ -1,11 +1,15 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import Pages from './pages/Pages';
 import Loading from './components/Loading';
-import { UserContext } from './contexts/user';
+
+import useRefreshToken from './hooks/useRefreshToken';
+
+export const URL = process.env.REACT_APP_BACKEND_URL;
 
 function App() {
 	const [isLoading, setLoading] = useState(true);
-	const { setAccessToken } = useContext(UserContext); //global user
+
+	let refresh = useRefreshToken();
 
 	useEffect(() => {
 		setLoading(false);
@@ -14,22 +18,16 @@ function App() {
 	useEffect(() => {
 		const firstLogin = localStorage.getItem('firstlogin');
 
+		// console.log('app token compo run');
+
 		if (firstLogin) {
 			const refreshToken = async () => {
-				const res = await fetch('/user/refresh_token', {
-					credentials: 'include',
-				});
-
-				const data = await res.json();
-
-				//get a new acccess token if cookie held
-				if (data.accesstoken) {
-					setAccessToken(data.accesstoken);
-				}
+				// eslint-disable-next-line
+				let token = await refresh();
 			};
-
 			refreshToken();
 		}
+		// eslint-disable-next-line
 	}, []);
 
 	return <div className='App'>{isLoading ? <Loading /> : <Pages />}</div>;

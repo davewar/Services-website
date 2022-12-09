@@ -6,6 +6,7 @@ const main = require('./sendEmails');
 
 require('dotenv').config();
 
+// 900s
 //create token - 15 mins
 const createToken = (id) => {
 	return jwt.sign({ id }, process.env.SECRET_KEY, {
@@ -13,7 +14,7 @@ const createToken = (id) => {
 	});
 };
 
-//1day
+//1d
 const createRefeshToken = (id) => {
 	return jwt.sign({ id }, process.env.REFESH_SECRET_KEY, {
 		expiresIn: '1d',
@@ -27,27 +28,39 @@ const isEmail = (email) => {
 	);
 };
 
+// @desc login
+// @route POST /user/login
+// @access Private
+
+// returns access token and sends cookie named refresh
 module.exports.login_post = async (req, res) => {
 	try {
 		const { email, password } = req.body;
 
 		if (!email || !password)
 			return res
-				.status(400)
+				.status(401)
 				.json({ errors: 'Incorrect login. Please try again' });
 		if (password.length < 6)
 			return res
-				.status(400)
+				.status(401)
 				.json({ errors: 'Password is at least 6 characters long.' });
 		if (!isEmail(email))
-			return res.status(400).json({
+			return res.status(401).json({
 				errors: 'Email is not valid. Please re-enter your email address',
 			});
 
 		//is there a user
 		const user = await User.findOne({ email });
 
+		// no user found
 		if (!user)
+			return res
+				.status(400)
+				.json({ errors: 'Incorrect login. Please try again' });
+
+		// user has inactive status
+		if (!user.active)
 			return res
 				.status(400)
 				.json({ errors: 'Incorrect login. Please try again' });
@@ -57,7 +70,7 @@ module.exports.login_post = async (req, res) => {
 		let count = user.IncorrectPW;
 
 		if (!isMatch) {
-			if (count == 3) {
+			if (count > 10) {
 				//LOCK ACCOUNT
 				await User.findOneAndUpdate(
 					{ _id: user._id },
@@ -96,7 +109,7 @@ module.exports.login_post = async (req, res) => {
 
 		//email address needs to be valid before first use
 		if (val == 'false') {
-			console.log('here');
+			// console.log('here');
 			//
 			const accesstoken = createToken(user._id);
 			const url = `${process.env.CLIENT_URL}/user/activate/${accesstoken}`;
@@ -113,19 +126,27 @@ module.exports.login_post = async (req, res) => {
 		const refreshToken = createRefeshToken(user._id);
 
 		//all gd
+		// maxAge: 1 * 24 * 60 * 60 * 1000, // 1d
 		res.cookie('refreshtoken', refreshToken, {
 			httpOnly: true,
+			// secure: true, //https
+			// sameSite: 'None', //cross-site cookie
 			path: '/user/refresh_token',
-			maxAge: 1 * 24 * 60 * 60 * 1000, // 1d
+			maxAge: 1 * 24 * 60 * 60 * 1000,
 		});
 
-		res
-			.status(200)
-			.send({ accesstoken, user: { id: user._id, name: user.name } });
+		res.status(200).send({
+			accesstoken,
+			user: { id: user._id, name: user.name, role: user.role },
+		});
 	} catch (err) {
 		res.status(400).json({ errors: err.message });
 	}
 };
+
+// @desc Create user
+// @route POST /user/signup
+// @access Public
 
 module.exports.signup_post = async (req, res) => {
 	try {
@@ -148,7 +169,7 @@ module.exports.signup_post = async (req, res) => {
 		//check if user exists
 		const user = await User.findOne({ email });
 
-		if (user) return res.status(400).json({ errors: 'Account already exists' });
+		if (user) return res.status(409).json({ errors: 'Account already exists' });
 
 		//hashpassword
 		const hashpassword = await bcrypt.hash(password, 10);
@@ -184,64 +205,92 @@ module.exports.signup_post = async (req, res) => {
 			msg: 'Please check your email and activate your account using the link',
 		});
 	} catch (err) {
-		res.status(400).json({ errors: err.message });
+		res.status(500).json({ errors: err.message });
 	}
 };
+
+// @desc logout user
+// @route GET /user/logout
+// @access Public
 
 // res.clearCookie('refreshtoken', { path: '/api/user/refresh_token' });
 module.exports.logout_get = async (req, res) => {
 	try {
 		res.clearCookie('refreshtoken', { path: '/user/refresh_token' });
-		return res.json({ msg: 'logged our' });
+		return res.status(202).json({ msg: 'logged out' });
 	} catch (err) {
-		res.status(400).json({ msg: err.message });
+		res.status(400).json({ errors: err.message });
 	}
 };
+
+// @desc delete user
+// @route DELETE /user/delete:id
+// @access Public
 
 module.exports.deleteUser_delete = async (req, res) => {
 	try {
 		await User.findByIdAndDelete(req.params.id);
-		res.status(200).json('user deleted');
+		res.status(202).json('user deleted');
 	} catch (err) {
-		res.json({ msg: err.message });
+		res.json({ errors: err.message });
 	}
 };
 
-// does user have a cookie, if yes give them a new access token
+// @desc does user have a cookie named refresh & valid ? if yes give them a new access token
+// @route GET /user/refresh_token
+// @access Private
+
+// When APP Component first loads this function is run
 module.exports.refreshToken_get = async (req, res) => {
 	try {
 		const refresh_token = req.cookies.refreshtoken;
 		// console.log("refreshToken_get - RT sent",refresh_token)
 		if (!refresh_token)
-			return res.status(400).json({ msg: 'Please Login or Register -a' });
+			return res.status(403).json({ msg: 'Please Login or Register -a' });
 
 		jwt.verify(refresh_token, process.env.REFESH_SECRET_KEY, (err, decoded) => {
 			// console.log(" refreshToken_get Cookie Valid - E",err)
 			// console.log(" refreshToken_get Cookie Valid - DECODED",decoded)
 			if (err)
-				return res.status(400).json({ msg: 'Please Login or Register -b' });
+				return res.status(403).json({ msg: 'Please Login or Register -b' });
 
 			const accesstoken = createToken(decoded.id);
-			// console.log("refreshToken_get NEW AT", accesstoken)
+			// console.log(
+			// 	'refreshToken_get run + new access token sent',
+			// 	accesstoken
+			// );
 			res.status(200).json({ accesstoken });
 		});
-	} catch (err) {
-		res.status(400).json({ dwmsg: err.message });
-	}
-};
-
-module.exports.getUser_get = async (req, res) => {
-	try {
-		// console.log('getUser_get a', req.user.id);
-		const user = await User.findById(req.user.id).select('-password');
-		// console.log("getUser_get", user);
-		if (!user) return res.status(400).json({ msg: 'User does not exist.' });
-
-		res.json(user);
 	} catch (err) {
 		res.status(400).json({ msg: err.message });
 	}
 };
+
+// @desc get user
+// @route GET /user/infor
+// @access Private
+
+// context>user component - send access token in authization header. returns user name + role.
+// This function will run again from this compo if access token changes
+module.exports.getUser_get = async (req, res) => {
+	try {
+		// console.log('getUser_get a', req.user.id);  // user obj select will exclude -password.
+		const user = await User.findById(req.user.id).select('-password');
+		// console.log("getUser_get", user);
+		if (!user) return res.status(400).json({ msg: 'User does not exist.' });
+
+		// res.status(200).json(user);
+		res.status(200).json({
+			user: { name: user.name, role: user.role },
+		});
+	} catch (err) {
+		res.status(400).json({ msg: err.message });
+	}
+};
+
+// @desc user supply email if they forgot pw. if user found > email sent  with access token in href link
+// @route POST /user/forgot
+// @access Public
 
 module.exports.forgot_post = async (req, res) => {
 	try {
@@ -290,9 +339,15 @@ module.exports.forgot_post = async (req, res) => {
 		res.status(200).send({
 			msg: 'Please check your email and reset your password using the link. You may need to check your spam/junk folder.',
 		});
-	} catch (err) {}
+	} catch (err) {
+		console.log('Forgot PW. DW', err.message);
+		res.status(500).json({ errors: err.message });
+	}
 };
 
+// @desc new user activate account via email sent to them.
+// @route POST /user/activation
+// @access Public
 module.exports.activate_post = async (req, res) => {
 	try {
 		const { accesstoken } = req.body;
@@ -335,6 +390,10 @@ module.exports.activate_post = async (req, res) => {
 		res.status(500).json({ errors: err.message });
 	}
 };
+
+// @desc  reset password
+// @route POST /user/reset
+// @access Public
 
 module.exports.reset_post = async (req, res) => {
 	try {
@@ -396,6 +455,42 @@ module.exports.reset_post = async (req, res) => {
 
 		res.json({
 			msg: 'Password successfully changed! Please log in to use your account',
+		});
+	} catch (err) {
+		res.status(400).json({ errors: err.message });
+	}
+};
+
+// @desc  update user active status + role, only Admin.
+// @route POST /user/update
+// @access Private
+
+module.exports.updateUser_put = async (req, res) => {
+	if (!req?.params?.id)
+		return res.status(400).json({ errors: 'ID parameter is required.' });
+
+	let = active = req.body.active;
+	let validated = req.body.validated;
+	let role = req.body.role;
+
+	if (!active || !validated || !role)
+		return res.status(400).json({ errors: 'Missing required fields' });
+
+	let foundUser = await User.findOne({ _id: req.params.id });
+
+	if (!foundUser) return res.status(400).json({ errors: 'No user found' });
+
+	let update = {
+		active: active,
+		validated: validated,
+		role: role,
+	};
+
+	try {
+		await User.findByIdAndUpdate({ _id: req.params.id }, { $set: update });
+
+		return res.json({
+			msg: 'User updated',
 		});
 	} catch (err) {
 		res.status(400).json({ errors: err.message });

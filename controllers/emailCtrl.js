@@ -2,23 +2,39 @@ const router = require('express').Router();
 let Email = require('../models/emails');
 const main = require('./sendEmails');
 
+// @desc Get all emails
+// @route GET /api/email
+// @access Private
+
 module.exports.getEmail_get = async (req, res) => {
 	try {
-		const email = await Email.find();
-		// res.send('hello');
-		res.status(200).json(email);
+		const emails = await Email.find();
+
+		// if (!emails?.length) {
+		// 	return res.status(400).json({ emails: 'No Emails found' });
+		// }
+
+		res.status(200).json({ msg: emails });
 	} catch (err) {
-		res.status(400).json({ msg: err.message });
+		res.status(400).json({ errors: err.message });
 	}
 };
 
-module.exports.addEmail_post = async (req, res) => {
-	// console.log('dw add');
+// @desc Create email
+// @route POST /api/email
+// @access Private
 
+module.exports.addEmail_post = async (req, res) => {
+	console.log('add');
 	try {
 		const name = req.body.name;
 		let email = req.body.email;
 		const comment = req.body.comment;
+
+		if (!name || !email || !comment)
+			return res
+				.status(401)
+				.json({ errors: 'All form fields are required. Please try again' });
 
 		const newEmail = new Email({
 			name,
@@ -41,8 +57,6 @@ module.exports.addEmail_post = async (req, res) => {
 		
 		`;
 
-		email = 'davewarwicker1@gmail.com';
-
 		//let me know email recd
 		main(email, url, desc, text);
 
@@ -51,9 +65,13 @@ module.exports.addEmail_post = async (req, res) => {
 		});
 	} catch (err) {
 		console.log('dwerr', err);
-		return res.status(400).json({ msg: err.message });
+		return res.status(400).json({ errors: err.message });
 	}
 };
+
+// @desc Delete email
+// @route DELETE /api/email:id
+// @access Private
 
 module.exports.deleteEmail_delete = async (req, res) => {
 	// console.log(req.params.id);
@@ -62,6 +80,6 @@ module.exports.deleteEmail_delete = async (req, res) => {
 
 		res.status(200).json('item deleted');
 	} catch (err) {
-		return res.status(400).json({ msg: err.message });
+		return res.status(400).json({ errors: err.message });
 	}
 };

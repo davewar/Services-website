@@ -4,10 +4,12 @@ import './contact.css';
 import locationImg from '../../assets/images/location.png';
 import phoneImg from '../../assets/images/phone-call.png';
 import emailImg from '../../assets/images/email.png';
+
+import { FaWhatsapp } from 'react-icons/fa';
+import useFetch from '../../hooks/useFetch';
+
 let map =
 	'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d159019.04030805102!2d-0.006866832327827696!3d51.482525396909296!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8afb31d647aa3%3A0x31adb65f3f5a8bf8!2s20%20Sussex%20Rd%2C%20Erith%20DA8%201JB!5e0!3m2!1sen!2suk!4v1668516813646!5m2!1sen!2suk';
-
-// '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d159019.04030805102!2d-0.006866832327827696!3d51.482525396909296!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8afb31d647aa3%3A0x31adb65f3f5a8bf8!2s20%20Sussex%20Rd%2C%20Erith%20DA8%201JB!5e0!3m2!1sen!2suk!4v1668516813646!5m2!1sen!2suk" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>';
 
 const Contact = () => {
 	const [name, setName] = useState('');
@@ -21,10 +23,13 @@ const Contact = () => {
 	const [signInErr, setSignInErr] = useState('');
 	const [success, setSuccess] = useState('');
 
+	let { data, isError, customFetch } = useFetch();
+
 	// email success
 
 	const handleChange = (e, item) => {
 		setSignInErr('');
+		setSuccess('');
 
 		/* eslint-disable */
 		const emailRegEx = RegExp(
@@ -51,37 +56,36 @@ const Contact = () => {
 	};
 
 	const handleSubmit = async (e) => {
-		// console.log(e);
 		// console.log(e.target.email.value);
 		e.preventDefault();
-
 		setSignInErr('');
 		setSuccess('');
 
 		if (name && email && comment && !nameErr && !emailErr && !commentErr) {
-			try {
-				const res = await fetch('api/email/', {
-					method: 'POST',
-					body: JSON.stringify({ name, email, comment }),
-					headers: {
-						'Content-Type': 'application/json',
-						credentials: 'include',
-					},
-				});
+			let url = '/api/email/';
 
-				const resData = await res.json();
+			let options = {
+				method: 'POST',
+				body: JSON.stringify({ name, email, comment }),
+				headers: {
+					'Content-Type': 'application/json',
+					credentials: 'include',
+				},
+			};
 
-				if (resData) {
-					console.log(resData);
-					setSuccess(resData.msg);
-					setName('');
-					setEmail('');
-					setComment('');
-				} else {
-					setSignInErr(resData.msg);
-				}
-			} catch (err) {
-				console.log('dw_error', err);
+			customFetch(url, options);
+			// console.log(data);
+			// console.log('ISERROR', isError);
+
+			if (isError) {
+				setSignInErr(isError);
+			} else if (data.msg) {
+				setSuccess(data.msg);
+				setName('');
+				setEmail('');
+				setComment('');
+			} else if (data.errors) {
+				setSignInErr(data.errors);
 			}
 		}
 	};
@@ -184,7 +188,7 @@ const Contact = () => {
 						<div className='rightside-div'>
 							<p>
 								DW-Serv
-								<br></br>20 Sussex Road
+								<br></br>Sussex Road
 								<br></br>Erith
 								<br></br>Kent
 								<br></br>DA8 1JB
@@ -197,7 +201,7 @@ const Contact = () => {
 							<img src={phoneImg} alt='phone' />
 						</div>
 						<div className='rightside-div'>
-							<p>07956 891404</p>
+							<p>01322 xxxxxx</p>
 						</div>
 					</div>
 
@@ -207,7 +211,7 @@ const Contact = () => {
 						</div>
 
 						<div className='rightside-div'>
-							<p>dw-serv@gmail.com</p>
+							<p>test@gmail.com</p>
 						</div>
 					</div>
 				</div>
@@ -218,6 +222,17 @@ const Contact = () => {
 					<iframe src={map} loading='lazy' id='map-frame'></iframe>
 				</div>
 			</section>
+
+			<div>
+				<a
+					href='https://wa.me/1111111111'
+					className='whatsapp_float'
+					target='_blank'
+					rel='noopener noreferrer'
+				>
+					<FaWhatsapp className='whatsapp-icon' />
+				</a>
+			</div>
 		</>
 	);
 };

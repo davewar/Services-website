@@ -31,9 +31,19 @@ const ResetPassword = () => {
 
 		/* eslint-disable */
 
-		// const emailRegEx = RegExp(
-		// 	/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-		// );
+		// To use in Prod
+		// if (item === 'password') {
+		// 	setPassword(e.target.value);
+
+		// 	let pwdValid = !pwdRegex.test(password);
+		// 	console.log(pwdValid);
+
+		// 	!pwdRegex.test(password)
+		// 		? setPasswordErr(
+		// 				'Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character'
+		// 		  )
+		// 		: setPasswordErr('');
+		// }
 
 		if (item === 'email') {
 			setEmail(e.target.value);
@@ -92,6 +102,7 @@ const ResetPassword = () => {
 				}
 			} catch (err) {
 				console.log('dw', err.message);
+				setSignInErr('No Server Response');
 			}
 		}
 	};
