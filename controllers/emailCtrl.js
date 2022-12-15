@@ -78,7 +78,7 @@ module.exports.deleteEmail_delete = async (req, res) => {
 	try {
 		await Email.findByIdAndDelete(req.params.id);
 
-		res.status(200).json('item deleted');
+		res.status(200).json('Item deleted');
 	} catch (err) {
 		return res.status(400).json({ errors: err.message });
 	}

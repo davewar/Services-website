@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './login.css';
 import { UserContext } from '../../contexts/user';
 import { AiOutlineEye } from 'react-icons/ai';
@@ -17,8 +17,6 @@ const Login = () => {
 	const [visable, setVisable] = useState('false');
 
 	const navigate = useNavigate();
-	const location = useLocation();
-	// const from = location.state?.from?.pathname || '/';
 
 	const handleChange = (e, item) => {
 		//clear
@@ -28,7 +26,9 @@ const Login = () => {
 
 		if (item === 'email') {
 			setEmail(e.target.value);
-			!emailRegEx.test(email) ? setEmailErr('Invalid Email!') : setEmailErr('');
+			!emailRegEx.test(e.target.value)
+				? setEmailErr('Invalid Email!')
+				: setEmailErr('');
 		}
 
 		// To use in Prod

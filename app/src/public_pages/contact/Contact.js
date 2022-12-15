@@ -38,18 +38,20 @@ const Contact = () => {
 
 		if (item === 'name') {
 			setName(e.target.value);
-			name.length < 3
+			e.target.value.length < 3
 				? setNameErr('Name must be at least 3 characters!')
 				: setNameErr('');
 		}
 		if (item === 'email') {
 			setEmail(e.target.value);
-			!emailRegEx.test(email) ? setEmailErr('Invalid Email!') : setEmailErr('');
+			!emailRegEx.test(e.target.value)
+				? setEmailErr('Invalid Email!')
+				: setEmailErr('');
 		}
 
 		if (item === 'comment') {
 			setComment(e.target.value);
-			comment.length < 10
+			e.target.value.length < 10
 				? setCommentErr('Please provide more details')
 				: setCommentErr('');
 		}

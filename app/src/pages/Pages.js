@@ -21,7 +21,7 @@ import Dashboard from '../private_pages/Dashboard'; // main Private page contain
 import RequireAuth from '../components/RequireAuth'; // << User logged in, Do they acccess role to view page?
 import UnAuthorized from '../components/UnAuthorised'; //  <<  view displayed if not allowed to view the page
 // content
-import Emails from '../private_pages/emails/Emails';
+import EmailList from '../private_pages/emails/EmailList';
 import Admin from '../private_pages/admin/Admin';
 import Projects from '../private_pages/projects/Projects';
 import Users from '../private_pages/users/Users';
@@ -75,7 +75,7 @@ const Pages = () => {
 							}
 						>
 							<Route path={Paths.DASHBOARDPATH} element={<Dashboard />}></Route>
-							<Route path={'/emails'} element={<Emails />}></Route>
+							<Route path={'/emails'} element={<EmailList />}></Route>
 							<Route path={'/users'} element={<Users />}></Route>
 						</Route>
 

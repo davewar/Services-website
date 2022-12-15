@@ -39,7 +39,9 @@ const Register = () => {
 
 		if (item === 'email') {
 			setEmail(e.target.value);
-			!emailRegEx.test(email) ? setEmailErr('Invalid Email!') : setEmailErr('');
+			!emailRegEx.test(e.target.value)
+				? setEmailErr('Invalid Email!')
+				: setEmailErr('');
 		}
 
 		// 	let pwdValid = !pwdRegex.test(password);

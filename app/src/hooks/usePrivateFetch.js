@@ -35,7 +35,7 @@ const usePrivateFetch = () => {
 
 				response = newResponse;
 				data = newData;
-				console.log('newResponse', data, response);
+				// console.log('newResponse', data, response);
 				return { data, response };
 			} else {
 				// console.log('cookie expired');
