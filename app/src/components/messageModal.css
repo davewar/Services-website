@@ -5,7 +5,7 @@
 	transform: translate(-50%, -50%);
 	border: grey solid 4px;
 	border-radius: 5px;
-	animation: animatetop 2s ease;
+	animation: animatetop 1s ease;
 	/* /// */
 }
 
@@ -20,7 +20,6 @@
 .modalHeader {
 	height: 50px;
 	background: white;
-	color: red;
 }
 
 .heading {
@@ -63,6 +62,8 @@
 	top: 0.5em;
 }
 
+.addBtn,
+.updateBtn,
 .deleteBtn,
 .cancelBtn {
 	border-radius: 5px;
@@ -71,29 +72,49 @@
 	text-decoration: none;
 	cursor: pointer;
 	font-weight: bold;
-	transition: all 0.5s ease-out;
+	transition: all 0.4s ease-out;
 	margin-right: 1em;
 }
 
 .cancelBtn {
 	background-color: lightgrey;
 }
-
-.deleteBtn {
-	background-color: var(--contact-color);
+.cancelBtn:hover {
+	color: lightgrey;
+	background-color: white;
+	border: lightgrey 2px solid;
 }
 
-.cancelBtn:hover {
-	color: var(--contact-color);
-	background-color: white;
-	border: var(--contact-color) 2px solid;
+.deleteBtn {
+	background-color: red;
 }
 
 .deleteBtn:hover {
+	color: red;
+	background-color: white;
+	border: 2px solid red;
+}
+
+.updateBtn {
+	background-color: var(--contact-color);
+}
+
+.updateBtn:hover {
 	color: var(--contact-color);
 	background-color: white;
 	border: 2px solid var(--contact-color);
 }
+
+.addBtn {
+	background-color: green;
+}
+
+.addBtn:hover {
+	color: green;
+	background-color: white;
+	border: 2px solid green;
+}
+
 @media only screen and (max-width: 600px) {
 	.modal {
 		width: 300px;
@@ -112,7 +133,7 @@
 
 @keyframes animatetop {
 	from {
-		top: -50%;
+		left: -50%;
 
 		opacity: 0;
 	}

@@ -42,6 +42,7 @@
 
 label,
 input,
+select,
 textarea {
 	display: block;
 	width: 100%;
@@ -59,9 +60,13 @@ textarea {
 }
 
 input,
+select,
 textarea {
 	border: 2px solid var(--secondary-color);
 	line-height: 1.25rem;
+}
+select {
+	padding-left: 0;
 }
 
 input::placeholder {

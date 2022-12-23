@@ -15,6 +15,9 @@ const EmailList = () => {
 
 	const [show, setShow] = useState(false);
 	const [deleteId, setDeleteId] = useState(false);
+	//sorting
+	const [direction, setDirection] = useState();
+	const [value, setValue] = useState();
 
 	let { callFetch } = usePrivateFetch();
 
@@ -52,7 +55,7 @@ const EmailList = () => {
 		// eslint-disable-next-line
 	}, []);
 
-	const deleteEmail = async () => {
+	const deleteItem = async () => {
 		setErrors('');
 
 		let id = deleteId;
@@ -105,12 +108,46 @@ const EmailList = () => {
 		setShow(false);
 	};
 
+	// sorting
+	const orderBy = (emails, value, direction) => {
+		if (direction === 'asc') {
+			return [...emails].sort((a, b) => (a[value] > b[value] ? 1 : -1));
+		}
+
+		if (direction === 'desc') {
+			return [...emails].sort((a, b) => (a[value] > b[value] ? -1 : 1));
+		}
+
+		return emails;
+	};
+
+	const switchDirection = () => {
+		if (direction === '') {
+			setDirection('desc');
+		} else if (direction === 'desc') {
+			setDirection('asc');
+		} else {
+			setDirection('');
+		}
+	};
+
+	const setValueAndDirection = (value) => {
+		switchDirection();
+		setValue(value);
+	};
+
+	// **** sorting end
+
 	//props for Message Modal
 	let dataObj = {
 		header: 'Delete Confirmation',
 		desc: 'Are you sure you want to delete ?',
 		buttonDesc: 'Delete',
+		buttonType: ' deleteBtn',
 	};
+
+	let newEmails = orderBy(emails, value, direction);
+
 	return (
 		<>
 			<div className='email-container'>
@@ -128,30 +165,52 @@ const EmailList = () => {
 					<MessageModal
 						dataObj={dataObj}
 						closeModal={closeModal}
-						deleteEmail={deleteEmail}
+						deleteItem={deleteItem}
 					/>
 				)}
 				<table className='table-emails'>
 					<thead>
 						<tr>
-							<th className='cell-name'>Name</th>
-							<th className='cell-address'>Email Address</th>
+							<th
+								className='cell-name'
+								onClick={() => {
+									setValueAndDirection('name');
+								}}
+							>
+								Name
+							</th>
+							<th
+								className='cell-address'
+								onClick={() => {
+									setValueAndDirection('email');
+								}}
+							>
+								Email Address
+							</th>
 							<th className='cell-comment'>Comment</th>
-							<th className='cell-date'>Date</th>
+							<th
+								className='cell-date'
+								onClick={() => {
+									setValueAndDirection('createdAt');
+								}}
+							>
+								Date
+							</th>
 							<th className='cell-action'>Action</th>
 						</tr>
 					</thead>
 					<tbody>
-						{emails && !loading
-							? emails.map((item) => {
-									return (
-										<Email key={item._id} {...item} getIdDelete={getIdDelete} />
-									);
-							  })
-							: null}
+						{emails && !loading ? (
+							newEmails.map((item) => {
+								return (
+									<Email key={item._id} {...item} getIdDelete={getIdDelete} />
+								);
+							})
+						) : (
+							<p id='noEmails'>No Emails</p>
+						)}
 					</tbody>
 				</table>
-				<p id='noEmails'>No Emails</p>
 			</div>
 		</>
 	);

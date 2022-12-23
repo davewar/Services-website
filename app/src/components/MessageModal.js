@@ -26,9 +26,9 @@ const MessageModal = (props) => {
 								Cancel
 							</button>
 							<button
-								className='deleteBtn'
+								className={props.dataObj.buttonType}
 								onClick={() => {
-									props.deleteEmail();
+									props.deleteItem();
 								}}
 							>
 								{props.dataObj.buttonDesc}

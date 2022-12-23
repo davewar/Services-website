@@ -23,8 +23,6 @@ const Dashboard = () => {
 			<br />
 			<Link to='/users'>Users</Link>
 			<br />
-			{/* <Link to='/admin'>Admin</Link> */}
-			<br />
 		</center>
 	);
 };

@@ -469,12 +469,12 @@ module.exports.updateUser_put = async (req, res) => {
 	if (!req?.params?.id)
 		return res.status(400).json({ errors: 'ID parameter is required.' });
 
-	let = active = req.body.active;
-	let validated = req.body.validated;
-	let role = req.body.role;
+	let { role, active, validated } = req.body;
 
-	if (!active || !validated || !role)
-		return res.status(400).json({ errors: 'Missing required fields' });
+	if (!active || !validated) {
+		console.log('AFTER', req.body);
+		return res.status(400).json({ errors: 'Missing required fields1fssv' });
+	}
 
 	let foundUser = await User.findOne({ _id: req.params.id });
 
@@ -492,6 +492,23 @@ module.exports.updateUser_put = async (req, res) => {
 		return res.json({
 			msg: 'User updated',
 		});
+	} catch (err) {
+		console.log('update put error', err);
+		res.status(400).json({ errors: err.message });
+	}
+};
+
+// @desc  get all users
+// @route Get /user
+// @access Private
+
+module.exports.getAllUsers_get = async (req, res) => {
+	try {
+		const users = await User.find().select('-password');
+
+		if (!users?.length) return res.status(400).json({ msg: 'No users found' });
+
+		res.status(200).json({ msg: users });
 	} catch (err) {
 		res.status(400).json({ errors: err.message });
 	}

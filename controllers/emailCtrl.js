@@ -25,7 +25,6 @@ module.exports.getEmail_get = async (req, res) => {
 // @access Private
 
 module.exports.addEmail_post = async (req, res) => {
-	console.log('add');
 	try {
 		const name = req.body.name;
 		let email = req.body.email;

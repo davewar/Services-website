@@ -22,18 +22,12 @@ import RequireAuth from '../components/RequireAuth'; // << User logged in, Do th
 import UnAuthorized from '../components/UnAuthorised'; //  <<  view displayed if not allowed to view the page
 // content
 import EmailList from '../private_pages/emails/EmailList';
-import Admin from '../private_pages/admin/Admin';
 import Projects from '../private_pages/projects/Projects';
-import Users from '../private_pages/users/Users';
+import UserList from '../private_pages/users/UserList';
 
 // No page found
 import Error from '../components/Error';
-
-const ROLES = {
-	User: 0,
-	Editor: 1,
-	Admin: 2,
-};
+import { ROLES } from '../constants/roles';
 
 const Pages = () => {
 	return (
@@ -48,7 +42,7 @@ const Pages = () => {
 						<Route path={Paths.CONTACTPATH} element={<Contact />}></Route>
 
 						{/* public login + password routes */}
-						<Route path={Paths.CREATEACCOUNT} element={<Register />}></Route>
+
 						<Route path={Paths.LOGINPATH} element={<Login />}></Route>
 						<Route
 							path={Paths.FORGOTPASSWORD}
@@ -58,6 +52,7 @@ const Pages = () => {
 							path={Paths.RESETPASSWORD + '/:id'}
 							element={<ResetPassword />}
 						></Route>
+						{/* admin/ editor can now bypass validation of an email address if they wish */}
 						<Route
 							path={Paths.ACTIVATEACCOUNT + '/:id'}
 							element={<ActivateAccount />}
@@ -76,7 +71,7 @@ const Pages = () => {
 						>
 							<Route path={Paths.DASHBOARDPATH} element={<Dashboard />}></Route>
 							<Route path={'/emails'} element={<EmailList />}></Route>
-							<Route path={'/users'} element={<Users />}></Route>
+							<Route path={'/users'} element={<UserList />}></Route>
 						</Route>
 
 						{/* editor and admin only */}
@@ -85,12 +80,8 @@ const Pages = () => {
 								<RequireAuth allowedRoles={[ROLES.Editor, ROLES.Admin]} />
 							}
 						>
+							<Route path={Paths.CREATEACCOUNT} element={<Register />}></Route>
 							<Route path={'/projects'} element={<Projects />}></Route>
-						</Route>
-
-						{/* admin only */}
-						<Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
-							<Route path={'/admin'} element={<Admin />}></Route>
 						</Route>
 
 						{/**********************protected routes end***************************** */}
