@@ -5,7 +5,7 @@ const verifyRoles = (...allowedRoles) => {
 		if (!req.user.id)
 			return res.status(401).json({ errors: 'Access denied 1' });
 
-		console.log('verifyRoles function run');
+		// console.log('verifyRoles function run');
 		// console.log('ALLOWEDROLES are:', allowedRoles);
 
 		try {

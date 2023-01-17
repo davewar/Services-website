@@ -5,10 +5,10 @@ import { ROLES } from '../../constants/roles';
 const EditUser = (props) => {
 	const [active, setActive] = useState(props.data.active);
 	const [role, setRole] = useState(props.data.role);
-	const [email, setEmail] = useState(props.data.email);
-	const [name, setName] = useState(props.data.name);
+	const [email] = useState(props.data.email);
+	const [name] = useState(props.data.name);
 	const [validated, setValidated] = useState(props.data.validated);
-	const [_id, setId] = useState(props.data._id);
+	const [_id] = useState(props.data._id);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();

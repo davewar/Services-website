@@ -33,12 +33,21 @@ app.use('/test', (req, res) => {
 	res.send('backend working');
 });
 
+// login / password reset  / register / activate  = users
+const userRouter = require('./routes/users');
+app.use('/user', userRouter);
+
+//emails from clients
 const emailRouter = require('./routes/email');
 app.use('/api/email', emailRouter);
 
-// login pw-reset- user
-const userRouter = require('./routes/users');
-app.use('/user', userRouter);
+// create/ amend / update / get  = clients
+const customerRouter = require('./routes/customer');
+app.use('/api/customer', customerRouter);
+
+//create/ amend / update / get  = projects
+const productRouter = require('./routes/product');
+app.use('/api/product', productRouter);
 
 if (process.env.NODE_ENV === 'production') {
 	app.use(express.static('app/build'));

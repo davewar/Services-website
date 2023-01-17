@@ -156,7 +156,7 @@ module.exports.signup_post = async (req, res) => {
 		if (!name || !email || !password)
 			return res
 				.status(400)
-				.json({ errors: 'Incorrect login. Please try again' });
+				.json({ errors: 'Missing Information. Please try again' });
 		if (password.length < 6)
 			return res
 				.status(400)
@@ -473,7 +473,7 @@ module.exports.updateUser_put = async (req, res) => {
 
 	if (!active || !validated) {
 		console.log('AFTER', req.body);
-		return res.status(400).json({ errors: 'Missing required fields1fssv' });
+		return res.status(400).json({ errors: 'Missing required fields' });
 	}
 
 	let foundUser = await User.findOne({ _id: req.params.id });

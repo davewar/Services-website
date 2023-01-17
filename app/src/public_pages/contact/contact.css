@@ -87,11 +87,6 @@ input::placeholder {
 	background-color: transparent;
 }
 
-.form-group:active label,
-.form-group:hover label,
-.form-group:focus label {
-	color: var(--contact-color);
-}
 .form-group:active input,
 .form-group:hover input,
 .form-group:focus input,
@@ -132,6 +127,12 @@ input::placeholder {
 }
 .text-capitalize {
 	text-transform: capitalize;
+}
+
+.alert {
+	max-width: 800px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 /* address details */

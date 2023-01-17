@@ -1,0 +1,10 @@
+RT Query Methods Summary
+
+		        getBy	findBy	queryBy		    getAllBy	findAllBy	queryAllBy
+No Match        error	error	NULL		    error	    error	    array
+1  Match		return	return	return		    array	    array	    array
+1+ Match	    error	error	error		    array	    array	    array
+Await		    no	    YES	    no		        no	        YES	        no
+
+
+

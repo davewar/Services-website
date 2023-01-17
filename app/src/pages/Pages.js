@@ -15,15 +15,28 @@ import ActivateAccount from '../public_pages/accounts/ActivateAccount';
 import Register from '../public_pages/accounts/Register';
 import ForgotPassword from '../public_pages/accounts/ForgotPassword';
 
-// Private views
+// ****************   Private views ************
+
 import Dashboard from '../private_pages/Dashboard'; // main Private page containing links
 // protection implementation
 import RequireAuth from '../components/RequireAuth'; // << User logged in, Do they acccess role to view page?
 import UnAuthorized from '../components/UnAuthorised'; //  <<  view displayed if not allowed to view the page
-// content
+
+// Contact us emails from clients
 import EmailList from '../private_pages/emails/EmailList';
-import Projects from '../private_pages/projects/Projects';
+
+// list of employees
 import UserList from '../private_pages/users/UserList';
+
+// create + amend for clients / projects
+import ProjectsMain from '../private_pages/projects/ProjectsMain'; // main projects page
+import ClientCreate from '../private_pages/projects/ClientCreate'; // << create a project client
+import ClientEdit from '../private_pages/projects/ClientEdit'; // << amend a project client
+import ProjectList from '../private_pages/projects/ProjectList'; // << all projects
+import ProjectsCreate from '../private_pages/projects/ProjectsCreate'; // << create a project
+import ProjectAmend from '../private_pages/projects/ProjectAmend'; // << project amend
+
+// ****************  end of private views ********
 
 // No page found
 import Error from '../components/Error';
@@ -72,6 +85,29 @@ const Pages = () => {
 							<Route path={Paths.DASHBOARDPATH} element={<Dashboard />}></Route>
 							<Route path={'/emails'} element={<EmailList />}></Route>
 							<Route path={'/users'} element={<UserList />}></Route>
+							{/* ******* */}
+
+							<Route path={'/projects'} element={<ProjectsMain />}>
+								<Route path={'/projects/all'} element={<ProjectList />}></Route>
+								<Route
+									path={'/projects/create'}
+									element={<ProjectsCreate />}
+								></Route>
+								<Route
+									path={'/projects/item/:id'}
+									element={<ProjectAmend />}
+								></Route>
+								<Route
+									path={'/projects/customer_create'}
+									element={<ClientCreate />}
+								></Route>
+								<Route
+									path={'/projects/customer_amend'}
+									element={<ClientEdit />}
+								></Route>
+							</Route>
+
+							{/* ******* */}
 						</Route>
 
 						{/* editor and admin only */}
@@ -81,7 +117,6 @@ const Pages = () => {
 							}
 						>
 							<Route path={Paths.CREATEACCOUNT} element={<Register />}></Route>
-							<Route path={'/projects'} element={<Projects />}></Route>
 						</Route>
 
 						{/**********************protected routes end***************************** */}

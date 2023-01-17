@@ -10,8 +10,7 @@ import { Link, useLocation } from 'react-router-dom';
 const Navbar = () => {
 	const location = useLocation(null);
 
-	const { isLogged, isAdmin, isUser, isEditor, logUserOut } =
-		useContext(UserContext);
+	const { isLogged, logUserOut } = useContext(UserContext);
 
 	return (
 		<>

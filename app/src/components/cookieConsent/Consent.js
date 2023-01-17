@@ -78,12 +78,6 @@ const Consent = () => {
 		return () => clearTimeout(timer);
 	}, []);
 
-	// const x = document.cookie.split(';').reduce((cookies, cookie) => {
-	// 	const [name, value] = cookie.split('=').map((c) => c.trim());
-	// 	return { ...cookies, [name]: value };
-	// }, {});
-	// console.log(x);
-
 	return (
 		<div>
 			{showCookieCompo && (

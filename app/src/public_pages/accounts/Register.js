@@ -148,7 +148,7 @@ const Register = () => {
 						<div className='form-group'>
 							<label htmlFor='name'>Full Name</label>
 							<input
-								type='name'
+								type='text'
 								required
 								autoComplete='off'
 								name='name'
