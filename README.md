@@ -20,10 +20,6 @@
 - MVC
 - JWT AccessToken && RefreshToken + HTTP only cookie
 
-## Website Live:
-
-https://dwshop-mern.cyclic.app/
-
 ### My figma draft starting point for the website:
 
 https://www.figma.com/file/ZEzekTBzzBdTPx0AP9US41/dw-servicing=1%3A2?node-id
