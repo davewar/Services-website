@@ -61,4 +61,4 @@ app.listen(PORT, () => {
 	console.log('Server running');
 });
 
-module.exports = connectDb;
+module.exports = app;

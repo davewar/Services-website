@@ -208,7 +208,7 @@ const ClientEdit = () => {
 						</option>
 
 						{customers?.map(function (customer) {
-							console.log(customers.length);
+							// console.log(customers.length);
 							return (
 								<option key={customer.email} value={customer.email}>
 									{customer.email}
