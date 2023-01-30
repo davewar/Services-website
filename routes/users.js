@@ -10,7 +10,7 @@ const loginLimiter = require('../middlewares/loginLimiter');
 // **********************************
 router.route('/login').post(loginLimiter, userCtrl.login_post); //login
 
-router.route('/signup').post(userCtrl.signup_post); //signup
+// router.route('/signup').post(userCtrl.signup_post); //signup
 router.route('/logout').get(userCtrl.logout_get); // logout
 
 router.route('/activation').post(userCtrl.activate_post);

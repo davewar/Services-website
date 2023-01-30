@@ -24,6 +24,8 @@ const Register = () => {
 	const [visable, setVisable] = useState('false');
 	const [visable2, setVisable2] = useState('false');
 
+	const { accessToken } = useContext(UserContext); //global user
+
 	const handleChange = (e, item) => {
 		//clear
 		setSignInErr('');
@@ -94,6 +96,7 @@ const Register = () => {
 					headers: {
 						'Content-Type': 'application/json',
 						credentials: 'include',
+						headers: { Authorization: `Bearer ${accessToken}` },
 					},
 				});
 
