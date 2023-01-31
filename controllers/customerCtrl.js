@@ -18,7 +18,7 @@ module.exports.getAllUsers_get = async (req, res) => {
 		const customers = await Customer.find();
 
 		if (customers?.length === 0) {
-			console.log('here');
+			// console.log('here');
 			return res.status(400).json({ msg: 'No customers found' });
 		}
 
@@ -33,7 +33,7 @@ module.exports.getAllUsers_get = async (req, res) => {
 // @access Private
 
 module.exports.signup_post = async (req, res) => {
-	console.log(req.body);
+	// console.log(req.body);
 	try {
 		let { name, businessName, email, telephone, address, createdBy } = req.body;
 
